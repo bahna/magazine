@@ -1,0 +1,30 @@
+{{ define "main" }}
+<h1 class="m0 mb4">{{ T "editing"}}: <em>{{ .Data.User.FirstName }} {{ .Data.User.LastName }}</em></h1>
+<div class="bg-admin-form p3">
+	<form class="col-6" method="post" action="/{{ langCode .Language }}/admin/users/edit/{{ idToStr .Data.User.ID }}">
+	    <input type="hidden" name="ID" value="{{ idToStr .Data.User.ID }}">
+	    <div class="mb2 flex flex-column">
+		<label>{{ T "email"}} </label>
+		<input type="email" name="Email" value="{{ .Data.User.Email.Address }}" required>
+	    </div>
+	    <div class="mb2 flex flex-column">
+		<label>{{ T "first_name"}} </label>
+		<input type="text" name="FirstName" value="{{ .Data.User.FirstName }}" required>
+	    </div>
+	    <div class="mb2 flex flex-column">
+		<label>{{ T "last_name"}} </label>
+		<input type="text" name="LastName" value="{{ .Data.User.LastName }}" required>
+	    </div>
+	    <div class="mb2 flex flex-column">
+		<label>{{ T "user_roles" }}</label>
+		<select name="Roles" multiple>
+		    {{ range $i, $v := .Data.Roles }}
+			{{ $r := plus $i 1 }}
+			<option value="{{ $r }}" {{ if hasRole $.Data.User.Roles $r }}selected{{ end }}>{{ T (print $v) }}</option>
+		    {{ end }}
+		</select>
+	    </div>
+	    <button class="btn btn-blue py1 px2 rounded" type="submit">{{ T "save" }}</button>
+	</form>
+</div>
+{{ end }}

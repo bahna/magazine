@@ -1,0 +1,35 @@
+{{ define "main" }}
+<nav class="flex items-baseline mb4">
+    <h1 class="m0 mr2">{{ T "users" }}</h1>
+    <a class="btn btn-blue py1 px2 rounded" href="/{{ langCode .Language }}/admin/users/new">{{ T "add" }}</a>
+</nav>
+<div class="overflow-scroll">
+	<table class="table">
+	    <thead>
+		<tr>
+		    <th class="p1">{{ T "full_name" }}</th>
+		    <th class="p1">{{ T "email" }}</th>
+		    <th class="p1">{{ T "user_roles" }}</th>
+		    <th class="p1">{{ T "active" }}</th>
+		    <th class="p1">{{ T "created_time" }}</th>
+		    <th class="p1">{{ T "actions" }}</th>
+		</tr>
+	    </thead>
+	    <tbody>
+		{{ range .Data.Users }}
+		    <tr>
+			<td class="border-bottom p1">{{ .FirstName }} {{ .LastName }}</td>
+			<td class="border-bottom p1">{{ .Email.Address }}</td>
+			<td class="border-bottom p1">{{ range .Roles }}{{ . }}{{ end }}</td>
+			<td class="border-bottom p1">{{ .Active }}</td>
+			<td class="border-bottom p1">{{ .Created }}</td>
+			<td class="border-bottom p1">
+			    <a class="btn-outline btn-blue btn-small rounded" href="/{{ langCode $.Language }}/admin/users/edit/{{ idToStr .ID }}">{{ T "edit" }}</a>
+			    <a class="btn-outline btn-blue btn-small rounded" href="/{{ langCode $.Language }}/admin/users/delete/{{ idToStr .ID }}" title="{{ T " remove_dependent_content_first " }}">{{ T "delete" }}</a>
+			</td>
+		    </tr>
+		{{ end }}
+	    </tbody>
+	</table>
+</div>
+{{ end }}

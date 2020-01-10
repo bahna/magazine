@@ -1,0 +1,21 @@
+{{ define "sidebar" }}
+<h1 class="mb4 bold">
+    <a class="blue-link" href="/{{ langCode .Language }}/admin/">{{ T "admin_index" }}</a>
+</h1>
+<!-- <span class="small italic">{{ .CurrentUser.Email.Address }}</span> -->
+
+<nav class="flex flex-column">
+    <a class="blue-link" href="/{{ langCode .Language }}/admin/topics/">{{ T "topics" }}</a>
+    <a class="blue-link" href="/{{ langCode .Language }}/admin/content/">{{ T "contents" }}</a>
+    <a class="blue-link" href="/{{ langCode .Language }}/admin/files/">{{ T "files" }}</a>
+    <a class="blue-link" href="/{{ langCode .Language }}/admin/users/">{{ T "users" }}</a>
+</nav>
+
+<nav class="mt2 flex flex-column">
+    <a class="blue-link" href="/">{{ T "go_home" }}</a>
+    {{ with .CurrentUser }}
+	    <a href="/{{ langCode $.Language }}/admin/users/passchange/{{ idToStr .ID }}" class="blue-link" title="{{ T "password_change" }}">{{ T "password_change" }}</a>
+	    <a href="/{{ langCode $.Language }}/logout" class="blue-link" title="{{ T "logout_user_msg" }} {{ .Email.Address }}">{{ T "logout_link" }}</a>
+    {{ end }}
+</nav>
+{{ end }}

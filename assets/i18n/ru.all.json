@@ -1,0 +1,455 @@
+{
+  "Administrator": {
+    "other": "Администратор"
+  },
+  "Apr": {
+    "other": "Апр"
+  },
+  "Article": {
+    "other": "Статья"
+  },
+  "ArticleSeries": {
+    "other": "Серия"
+  },
+  "Audio": {
+    "other": "Подкаст"
+  },
+  "Aug": {
+    "other": "Авг"
+  },
+  "Author": {
+    "other": "Автор"
+  },
+  "Banner": {
+    "other": "Баннер"
+  },
+  "Dec": {
+    "other": "Дек"
+  },
+  "Event": {
+    "other": "Событие"
+  },
+  "Expert": {
+    "other": "Эксперт"
+  },
+  "Feb": {
+    "other": "Фев"
+  },
+  "Jan": {
+    "other": "Янв"
+  },
+  "Jul": {
+    "other": "Июл"
+  },
+  "Jun": {
+    "other": "Июн"
+  },
+  "Mar": {
+    "other": "Мар"
+  },
+  "May": {
+    "other": "Май"
+  },
+  "Nov": {
+    "other": "Ноя"
+  },
+  "Oct": {
+    "other": "Окт"
+  },
+  "Page": {
+    "other": "Страница"
+  },
+  "Photoreport": {
+    "other": "Фотоотчёт"
+  },
+  "Research": {
+    "other": "Исследования"
+  },
+  "Sep": {
+    "other": "Сен"
+  },
+  "Video": {
+    "other": "Видео"
+  },
+  "Visitor": {
+    "other": "Посетитель"
+  },
+  "actions": {
+    "other": "Действия"
+  },
+  "active": {
+    "other": "Активный"
+  },
+  "add": {
+    "other": "Добавить"
+  },
+  "add_new_content": {
+    "other": "Добавить материал"
+  },
+  "add_new_user": {
+    "other": "Добавить пользователя"
+  },
+  "add_topic_link": {
+    "other": "Добавить тему"
+  },
+  "admin_index": {
+    "other": "Управление сайтом"
+  },
+  "admin_link": {
+    "other": "Панель управления"
+  },
+  "and_more": {
+    "other": "и др."
+  },
+  "answered_by": {
+    "other": "Отвечает"
+  },
+  "ask_question": {
+    "other": "Задать вопрос"
+  },
+  "ask_question_done_title": {
+    "other": "Вопрос отправлен"
+  },
+  "ask_question_title": {
+    "other": "Задайте свой вопрос"
+  },
+  "author": {
+    "other": "Автор"
+  },
+  "authors": {
+    "other": "Авторы"
+  },
+  "bahna": {
+    "other": "Багна"
+  },
+  "bahna_tagline": {
+    "other": "общественная охрана дикой природы"
+  },
+  "body": {
+    "other": "Текст"
+  },
+  "choose_file": {
+    "other": "Выберите файл"
+  },
+  "choose_language": {
+    "other": "Выберите язык"
+  },
+  "choose_topic": {
+    "other": "Выберите тему"
+  },
+  "choose_topics": {
+    "other": "Выберите темы"
+  },
+  "choose_type": {
+    "other": "Выберите тип материала"
+  },
+  "content": {
+    "other": "Материал"
+  },
+  "content_created_at": {
+    "other": "Дата"
+  },
+  "content_images": {
+    "other": "Изображения"
+  },
+  "content_meta_form_fields": {
+    "other": "Дополнительные поля"
+  },
+  "content_title": {
+    "other": "Заголовок"
+  },
+  "content_topic": {
+    "other": "Тема"
+  },
+  "contents": {
+    "other": "Материалы"
+  },
+  "cover": {
+    "other": "Обложка"
+  },
+  "cover_external": {
+    "other": "Обложка внешняя"
+  },
+  "cover_internal": {
+    "other": "Обложка внутренняя"
+  },
+  "created_time": {
+    "other": "Дата создания"
+  },
+  "delete": {
+    "other": "Удалить"
+  },
+  "do_optimize_upload": {
+    "other": "Оптимизировать"
+  },
+  "edit": {
+    "other": "Редактировать"
+  },
+  "edit_content": {
+    "other": "Материал"
+  },
+  "edit_topic": {
+    "other": "Тема"
+  },
+  "editing": {
+    "other": "Редактирование"
+  },
+  "email": {
+    "other": "Эл. почта"
+  },
+  "event_location": {
+    "other": "Место"
+  },
+  "event_start_time": {
+    "other": "Время начала"
+  },
+  "events": {
+    "other": "События"
+  },
+  "false": {
+    "other": "Нет"
+  },
+  "file_credits": {
+    "other": "Правообладатель"
+  },
+  "file_upload": {
+    "other": "Загрузка файла"
+  },
+  "files": {
+    "other": "Файлы"
+  },
+  "filter_btn": {
+    "other": "Фильтровать"
+  },
+  "filter_by_topic": {
+    "other": "Фильтровать по теме"
+  },
+  "filter_by_topic_all": {
+    "other": "Все темы"
+  },
+  "filter_by_type": {
+    "other": "Фильтровать по типу"
+  },
+  "filter_by_type_all": {
+    "other": "Все типы"
+  },
+  "first_name": {
+    "other": "Имя"
+  },
+  "found_on_search_query": {
+    "other": "Найдено по запросу"
+  },
+  "full_name": {
+    "other": "Полное имя"
+  },
+  "go_home": {
+    "other": "На главную"
+  },
+  "image_caption": {
+    "other": "Подпись"
+  },
+  "image_code_sample": {
+    "other": "Пример вставки изображения"
+  },
+  "image_preview": {
+    "other": "Предпросмотр"
+  },
+  "index": {
+    "other": "Индекс"
+  },
+  "infocenter": {
+    "other": "Инфоцентр"
+  },
+  "infocenter_tagline": {
+    "other": "эксперты отвечают на ваши вопросы"
+  },
+  "language": {
+    "other": "Язык"
+  },
+  "languages": {
+    "other": "Языки"
+  },
+  "last_name": {
+    "other": "Фамилия"
+  },
+  "lede": {
+    "other": "Лид"
+  },
+  "link": {
+    "other": "Ссылка"
+  },
+  "login_form": {
+    "other": "Данные для аутентификации"
+  },
+  "login_link": {
+    "other": "Вход"
+  },
+  "login_title": {
+    "other": "Авторизация"
+  },
+  "logout_link": {
+    "other": "Выйти"
+  },
+  "markdown_markup": {
+    "other": "Markdown-разметка"
+  },
+  "name": {
+    "other": "Имя"
+  },
+  "new_language": {
+    "other": "Новый язык"
+  },
+  "new_password": {
+    "other": "Новый пароль"
+  },
+  "new_password_confirm": {
+    "other": "Подтверждение нового пароля"
+  },
+  "new_topic": {
+    "other": "Новая тема"
+  },
+  "new_user": {
+    "other": "Новый пользователь"
+  },
+  "new_user_creation_title": {
+    "other": "Создание нового пользователя"
+  },
+  "news_subscription": {
+    "other": "Новостная рассылка"
+  },
+  "no_content": {
+    "other": "Ни одного материала не найдено"
+  },
+  "no_translation": {
+    "other": "Перевод отсутствует"
+  },
+  "optimized_uploaded_files": {
+    "other": "Оптимизированные"
+  },
+  "original_image": {
+    "other": "Оригинал"
+  },
+  "page": {
+    "other": "Страница"
+  },
+  "page_description": {
+    "other": "Описание страницы (мета-тег)"
+  },
+  "page_meta_form_fields": {
+    "other": "Мета-данные веб-страницы"
+  },
+  "page_slug": {
+    "other": "Путь к странице (мета-тег)"
+  },
+  "page_title": {
+    "other": "Заголовок страницы (мета-тег)"
+  },
+  "parent_content": {
+    "other": "Родительский материал"
+  },
+  "password": {
+    "other": "Пароль"
+  },
+  "password_change": {
+    "other": "Изменение пароля"
+  },
+  "password_confirm": {
+    "other": "Пароль ещё раз"
+  },
+  "password_restore": {
+    "other": "Восстановление"
+  },
+  "password_restore_title": {
+    "other": "Сброс пароля"
+  },
+  "podcasts": {
+    "other": "Подкасты"
+  },
+  "promoted": {
+    "other": "Важно"
+  },
+  "public": {
+    "other": "Опубликован"
+  },
+  "published_time": {
+    "other": "Время публикации"
+  },
+  "question": {
+    "other": "Вопрос"
+  },
+  "remove_dependent_content_first": {
+    "other": "Необходимо удалить зависимые данные"
+  },
+  "restore_password": {
+    "other": "Восстановить"
+  },
+  "save": {
+    "other": "Сохранить"
+  },
+  "scheduled_time": {
+    "other": "Запланированная публикация"
+  },
+  "search": {
+    "other": "Поиск"
+  },
+  "search_btn": {
+    "other": "Искать"
+  },
+  "search_placeholder": {
+    "other": "Поиск по материалам сайта"
+  },
+  "send": {
+    "other": "Отправить"
+  },
+  "signup": {
+    "other": "Регистрация"
+  },
+  "signup_link": {
+    "other": "Регистрация"
+  },
+  "slug": {
+    "other": "Путь в URL"
+  },
+  "subscribe_me": {
+    "other": "Подписаться"
+  },
+  "thank_you_for_your_question": {
+    "other": "Спасибо за ваш вопрос. Он успешно сохранён и эксперты скоро его получат. Ответ может занять какое-то время, поэтому, пожалуйста, будьте терпеливы. Мы свяжемся с вами, когда ответ будет готов."
+  },
+  "title": {
+    "other": "Заголовок"
+  },
+  "topic": {
+    "other": "Раздел"
+  },
+  "topics": {
+    "other": "Темы"
+  },
+  "true": {
+    "other": "Да"
+  },
+  "type": {
+    "other": "Тип"
+  },
+  "uploaded_file": {
+    "other": "Файл"
+  },
+  "uploaded_files": {
+    "other": "Файлы"
+  },
+  "user_data": {
+    "other": "Данные пользователя"
+  },
+  "user_registration": {
+    "other": "Регистрация"
+  },
+  "user_roles": {
+    "other": "Роли пользователя"
+  },
+  "users": {
+    "other": "Пользователи"
+  },
+  "weight": {
+    "other": "Вес"
+  }
+}

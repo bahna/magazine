@@ -1,0 +1,11 @@
+{{ define "header" }}
+<header class="flex p2 justify-between items-center border-bottom">
+    <span class="h2">{{ T "admin_index" }}</span>
+    <nav class="flex">
+	<a class="mr2" href="/">{{ T "go_home" }}</a>
+	{{ with .CurrentUser }}
+	    <a href="/{{ langCode $.Language }}/logout" class="" title="{{ T "logout_user_msg" }} {{ .Email.Address }}">{{ T "logout_link" }}</a>&nbsp;({{ .Email.Address }})
+	{{ end }}
+    </nav>
+</header>
+{{ end }}

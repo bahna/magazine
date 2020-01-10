@@ -1,0 +1,177 @@
+{{ define "og-image" }}
+    {{ with .Data.Content }}
+	{{ if gt (len .CoverExternal) 0 }}
+	    {{.CoverExternal}}
+	{{ else if gt (len .CoverInternal) 0 }}
+	    {{ .CoverInternal }}
+	{{ end }}
+    {{ end }}	
+{{ end }}
+
+{{ define "meta" }}
+    {{ with .Data.Content }}
+	{{ if gt (len .PageTitle) 0 }}
+	    <title>{{ .PageTitle }}</title>
+	{{ else }}
+	    <title>{{ .Title }}</title>
+	{{ end }}
+
+	{{ if gt (len .PageDescription) 0 }}
+	    <meta name="description" content="{{ .PageDescription }}">
+	{{ else }}
+	    {{ with .Lede }}<meta name="description" content="{{ . }}">{{ end }}
+	{{ end }}
+    {{ end }}
+{{ end }}
+
+{{ define "body_cls" }}material{{ end }}
+
+{{ define "main" }}
+    {{ with .Data.Content }}
+	<style>
+	 {{ if gt (len .CoverInternal) 0 }}
+	 #material-cover-{{ idToStr .ID }} {
+             background: whitesmoke no-repeat center / cover url("{{ .CoverInternal }}");
+             color: white;
+	 }
+	 {{ end }}
+	</style>
+
+	<article class="bg-white flex flex-wrap">
+	    {{ if gt (len .CoverInternal) 0 }}
+		<header id="material-cover-{{ idToStr .ID }}" class="material-cover bg-light-grey col-12 flex flex-column justify-between
+			    {{ if eq (print $.Data.Content.Type) "Photoreport" }}{{ else }}mb2{{ end }}">
+		    <h1 class="m0 h1 my3 mx2">{{ .Title }}</h1>
+		    <div class="mt3 mb2 mx2 small grey h6 flex flex-wrap items-center justify-between">
+			{{ if not .Page }}
+			    <ul class="m0 my1 list-reset mr4">
+				{{/* <li class="inline-block mr1">
+				<a class="mr2 dimmed-accent-link" href="#"><i class="fab fa-facebook-f"></i></a>
+				</li>
+				<li class="inline-block mr1">
+				<a class="mr2 dimmed-accent-link" href="#"><i class="fab fa-vk"></i></a>
+				</li> */}}
+				{{if ne .Type 4}}
+				    <li class="inline-block mr2">{{ T "topic"}}: <a href="/{{ langCode $.Language }}/{{ (index .Topics 0).Slug }}/">{{ (index .Topics 0).Title }}</a></li>
+				    {{if and (ne .Type 6) (ne .Type 5)}}
+					<li class="inline-block mr2">{{ T "authors" }}: {{ joinUsers .Authors ", " }}</li>
+				    {{end}}
+				{{end}}
+				<li class="inline-block mr2">{{ T "content_created_at" }}: {{ pubDate . }}</li>
+			    </ul>
+			{{ end }}
+			<div class="addthis_inline_share_toolbox"></div>
+		    </div>
+		</header>
+	    {{ else }}
+		<header class="mb2 col-12">
+		    <h1 class="m0 h1 mx2 mt4 mb1">{{ .Title }}</h1>
+		    <div class="mt3 mb2 mx2 small grey h6 flex flex-wrap flex-column">
+			{{ if not .Page }}
+			    <ul class="m0 mb1 list-reset small grey h6">
+				{{/* <li class="inline-block mr1">
+				&nbsp;<a class="mr2 dimmed-link" href="#"><i class="fab fa-facebook-f"></i></a>
+				</li>
+				<li class="inline-block mr1">
+				<a class="mr2 dimmed-link" href="#"><i class="fab fa-vk"></i></a>
+				</li> */}}
+				{{if ne .Type 4}}
+				    <li class="inline-block mr2">{{ T "topic"}}: <a href="/{{ langCode $.Language }}/{{ (index .Topics 0).Slug }}/">{{ (index .Topics 0).Title }}</a></li>
+				    {{if and (ne .Type 6) (ne .Type 5)}}
+					<li class="inline-block mr2">{{ T "author" }}: {{ joinUsers .Authors ", " }}</li>
+				    {{end}}
+				{{end}}
+				<li class="inline-block mr2">{{ T "content_created_at" }}: {{ pubDate . }}</li>
+			    </ul>
+			{{ end }}
+			<div class="addthis_inline_share_toolbox"></div>
+		    </div>
+		</header>
+	    {{ end }}
+            <section class="material-text px2 pb3 flex flex-wrap col-12 
+                            {{ if eq (print $.Data.Content.Type) "Photoreport" }}justify-center pt3 bg-dark{{ end }}
+                            ">
+		{{ with .Lede }}
+		    <div class="lede mb4 col-12">{{ md . }}</div>
+		{{ end }}
+
+		{{ with .Body }}
+		    <div class="article-width col-12 md-col-6 mb4">{{ md . }}</div>
+		{{ end }}
+
+		{{ with .Images }}
+		    <div class="col-12 {{ if eq (print $.Data.Content.Type) "Photoreport" }}md-col-10{{ else }}md-col-6{{ end }}">
+			{{ range . }}
+			    {{ if gt (len .LinkTo) 0 }}
+				<figure class="flex flex-column m0 mb3 px2">
+				    <a href="{{ .LinkTo }}"><img class="col-12" alt="{{ .Caption }}" src="{{ .URL }}"></a>
+				    <figcaption class="col-12 grey">{{ if .Caption }}<span class="mr2">{{ .Caption }}</span>{{ end }}<span>&copy;&nbsp;{{ .Credits }}</figcaption>
+				</figure>
+				    {{ else }}
+				<figure class="flex flex-column m0 mb3 px2">
+				    <img class="col-12" alt="{{ .Caption }}" src="{{ .URL }}">
+				    <figcaption class="col-12 grey">{{ if .Caption }}<span class="mr2">{{ .Caption }}</span>{{ end }}<span>&copy;&nbsp;{{ .Credits }}</span></figcaption>
+				</figure>
+			    {{ end }}
+			{{ end }}
+		    </div>
+		{{ end }}
+	    </section>
+
+	    <!-- series -->
+	    {{ if eq (print .Type) "ArticleSeries" }}
+		<div class="flex flex-wrap col-12">
+		    {{ range .Children }}
+			{{ if or (eq (print .Type) "Article") (eq (print .Type) "Photoreport") }}
+			    {{ template "contentCard" . }}
+			{{ end }}
+		    {{ end }}
+		</div>
+	    {{ end }}
+	</article>
+
+    {{ end }}
+
+    <!-- social btns -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b747a9b11e8b797"></script> 
+{{ end }}
+
+{{ define "contentCard" }}
+    <div id="card-wrapper-{{ idToStr .ID }}" class="col-12 md-col-4 flex">
+	<article id="card-{{ idToStr .ID }}" class="card-simple rounded mx2 pb2 mb3 flex flex-column flex-auto">
+	    {{ if gt (len .CoverExternal) 0 }}
+		{{ template "cardImage" . }}
+	    {{ end }}
+	    <h2 class="m0 h3 px3 pt2 flex-auto"><a href="/{{ .Language }}/{{ (index .Topics 0).Slug }}/{{ .Slug }}/" class="neutral-secondary-accent-link">{{ .Title }}</a></h2>
+	    <footer class="flex flex-wrap mt2 px3 h6 items-baseline">
+		{{ $item := . }}
+		{{ range .Topics }}
+		    <a class="caps neutral-secondary-accent-link mr2" href="/{{ .Language }}/{{ .Slug }}/">{{ .Title }}</a>
+		{{ end }}
+		<span class="date rounded">{{ pubDate . }}</span>
+	    </footer>
+	</article>
+	{{ template "clickListener" . }}
+    </div>
+{{ end }}
+
+{{ define "cardImage" }}
+    <style>
+     #card-image-{{ idToStr .ID }} {
+	 background-image: url("{{ .CoverExternal }}");
+	 background-color: rgb(36, 39, 36);
+	 background-size: cover;
+	 background-position: center center;
+     }
+    </style>
+    <div id="card-image-{{ idToStr .ID }}" class="card-image rounded-top"></div>
+{{ end }}
+
+{{ define "clickListener" }}
+    <script>
+     var card = document.querySelector("#card-{{ idToStr .ID }}");
+     card.addEventListener("click", function (event) {
+	 window.location.pathname = "/{{ .Language }}/{{ (index .Topics 0).Slug }}/{{ .Slug }}/";
+     });
+    </script>
+{{ end }}

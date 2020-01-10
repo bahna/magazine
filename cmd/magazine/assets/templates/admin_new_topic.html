@@ -1,0 +1,32 @@
+{{ define "main" }}
+<h1 class="m0 mb4">{{ T "new_topic" }}</h1>
+<div class="bg-admin-form p3">
+  <form class="" method="post" action="/{{ langCode .Language }}/admin/topics/">
+    <div class="mb2 flex flex-column">
+      <label>{{ T "title" }}</label>
+      <input type="text" name="Title" required>
+    </div>
+    <div class="mb2 flex flex-column">
+      <label>{{ T "choose_language" }}</label>
+      <select name="Language">
+        {{ range .Data.AvailableLanguages }}
+        <option value="{{ langCode . }}">{{ langName . }}</option>
+        {{ end }}
+      </select>
+    </div>
+    <div class="mb2 flex flex-column">
+      <label>{{ T "weight" }}</label>
+      <input type="number" name="Weight">
+    </div>
+    <div class="mb2">
+      <label>{{ T "public"}} </label>
+      <input type="checkbox" name="Public" checked>
+    </div>
+    <div class="mb2">
+      <label>{{ T "page"}} </label>
+      <input type="checkbox" name="Page">
+    </div>
+    <button class="btn btn-blue py1 px2 rounded" type="submit">{{ T "save" }}</button>
+  </form>
+</div>
+{{ end }}

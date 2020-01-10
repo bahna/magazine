@@ -1,0 +1,130 @@
+{{ define "main" }}
+<h1 class="m0 mb4">{{ T "add_new_content" }}</h1>
+<form id="content-form" method="post" action="/{{ langCode .Language }}/admin/content/">
+  <div class="bg-admin-form p3 flex flex-wrap">
+    <main class="sm-col-12 md-col-7 flex flex-column">
+      <div class="mb2 flex flex-column">
+        <label>{{ T "title" }}</label>
+        <input type="text" name="Title">
+      </div>
+      <div class="mb2 flex flex-column">
+        <label>{{ T "lede" }}</label>
+        <textarea name="Lede" rows=10></textarea>
+      </div>
+      <div class="mb3 flex flex-column flex-auto">
+        <label>{{ T "body" }}</label>
+        <textarea class="flex-auto" name="Body" rows=30></textarea>
+      </div>
+    </main>
+    
+    <aside class="sm-col-12 md-col-5">
+      <div class="pl3">
+        <div id="content-type-select"></div>
+        <div class="mb2 flex flex-column">
+  		    <label>{{ T "parent_content" }}</label>
+  		    <select name="ParentID">
+            <option value=""></option>
+  			    {{ range .Data.ContentParents }}
+  			      <option value="{{ idToStr .ID }}">{{ .Title }} ({{.Language}})</option>
+  			    {{ end }}
+  		    </select>
+  		  </div>
+        <div class="mb2 flex flex-column">
+          <label>{{ T "choose_language" }}</label>
+          <select name="Language">
+            {{ range .Data.AvailableLanguages }}
+            <option value="{{ langCode . }}">{{ langName . }}</option>
+            {{ end }}
+          </select>
+        </div>
+        <div class="mb2 flex flex-column">
+          <label>{{ T "choose_topic" }}</label>
+          <select name="TopicIDs" required>
+            {{ range .Data.Topics }}
+            <option value="{{ idToStr .ID }}">{{ .Title }} ({{ .Language }})</option>
+            {{ end }}
+          </select>
+        </div>
+        <div class="mb2 flex flex-column">
+          <label>{{ T "authors" }}</label>
+          <select name="AuthorIDs" multiple required>
+            {{ range .Data.Users }}
+            <option value="{{ idToStr .ID }}"
+              {{ if eq $.CurrentUser.ID .ID}}selected{{ end }}>
+                {{ .FirstName }} {{ .LastName }}
+            </option>
+            {{ end }}
+          </select>
+        </div>
+        <div class="mb2 flex flex-column">
+          <label><abbr title="external: 1120x200 px, @2x: 2240x400 px">{{ T "cover_external" }}</abbr></label>
+          <input type="text" name="CoverExternal">
+        </div>
+        <div class="mb2 flex flex-column">
+          <label><abbr title="2560x270 px, @2x: 5120x540 px">{{ T "cover_internal" }}</abbr></label>
+          <input type="text" name="CoverInternal">
+        </div>
+        <div class="mb2 flex flex-column">
+          <label>{{ T "scheduled_time"}} </label>
+          <input type="datetime-local" name="Scheduled" value="{{ inputTimeNow }}">
+        </div>
+        <div class="mb2 flex flex-column">
+          <label>{{ T "weight" }}</label>
+          <input type="number" name="Weight">
+        </div>
+        <div class="mb2">
+          <label>{{ T "promoted"}} </label>
+          <input type="checkbox" name="Promoted">
+        </div>
+        <div class="mb2">
+          <label>{{ T "public"}} </label>
+          <input type="checkbox" name="Public" checked>
+        </div>
+
+
+        <fieldset class="flex flex-auto flex-wrap flex-column my4 p2">
+          <legend class="bold">{{ T "content_images" }}</legend>
+          <div id="add-content-images"></div>
+        </fieldset>
+  
+        <fieldset class="flex flex-auto flex-wrap flex-column mb3 p2">
+          <legend class="bold">{{ T "page_meta_form_fields" }}</legend>
+          <div class="mb2 flex flex-column">
+            <label><abbr title="{{ T "auto_generated_if_nil" }}">{{ T "page_title" }}</abbr></label>
+            <input type="text" name="PageTitle">
+          </div>
+          <div class="mb2 flex flex-column">
+            <label><abbr title="{{ T "auto_generated_if_nil" }}">{{ T "page_description" }}</abbr></label>
+            <textarea name="PageDescription" rows=5></textarea>
+          </div>
+        </fieldset>
+      </div>
+    </aside>
+  
+    <button class="btn btn-blue py1 px2 rounded" type="submit">{{ T "add" }}</button>
+  	{{/* <a href="#" class="blue-link ml1" type="submit">{{ T "preview" }}</a> */}}
+  </div>
+</form>
+
+<script>
+ var captionLabel = {{ T "image_caption" }};
+ var removeLabel = {{ T "delete" }};
+ var moreLabel = {{ T "add" }};
+ var linkToLabel = {{ T "link" }};
+ var chooseTypeLabel = {{ T "choose_type" }};
+ var eventStartTimeLabel = {{ T "event_start_time" }};
+ var eventLocationLabel = {{ T "event_location" }};
+ var images = [];
+ var contentTypes = {
+   {{ range $i, $v := .Data.ContentTypes }}
+    {{ $i }}: "{{ T (printf "%s" $v) }}",
+   {{ end }}
+ };
+ var contentLocation = null;
+ var contentLinkTo = null;
+ var contentEventStart = null;
+ var contentType = null;
+</script>
+<script src="/static/add_images.js" defer></script>
+<script src="/static/content_form.js" defer></script>
+{{ end }}

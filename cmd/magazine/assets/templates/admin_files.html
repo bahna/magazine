@@ -1,0 +1,140 @@
+{{ define "main" }}
+<h1 class="m0 mb4">{{ T "file_upload" }}</h1>
+<div class="bg-admin-form p3 mb4">
+  <form class="" method="post" enctype="multipart/form-data">
+    <div class="mb2 flex flex-column">
+  	  <label for="Files">{{ T "choose_file" }}</label>
+  	  <input name="Files" type="file">
+    </div>
+    <div class="mb2 flex flex-column">
+  	  <label>{{ T "title" }}</label>
+  	  <input type="text" name="Title">
+    </div>
+    <div class="mb2 flex flex-column">
+  	  <label>{{ T "file_credits" }}</label>
+  	  <input type="text" name="Credits" required>
+    </div>
+    <div class="mb2">
+  	  <label for="NeedOptimize">{{ T "do_optimize_upload"}} </label>
+  	  <input id="NeedOptimize" type="checkbox" name="NeedOptimize">
+    </div>
+    <button class="btn btn-blue py1 px2 rounded" type="submit">{{ T "add" }}</button>
+  </form>
+</div>
+
+<nav class="flex items-baseline mb4">
+    <h1 class="m0 mr2">{{ T "uploaded_files" }} <sup class="h4">{{ .Data.CurrentItems }}/{{ .Data.TotalItems }}</sup></h1>
+</nav>
+
+<div class="col-12 overflow-scroll">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="p1">{{ T "image_preview" }}</th>
+        <th class="p1">{{ T "original_image" }}</th>
+        <th class="p1">{{ T "optimized_uploaded_files" }}</th>
+        <th class="p1">{{ T "image_code_sample" }}</th>
+        <th class="p1">{{ T "title" }}</th>
+        <th class="p1">{{ T "file_credits" }}</th>
+        <th class="p1">{{ T "actions" }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{ range .Data.Files }}
+      <tr>
+        <td class="border-bottom border-dark p1 col-2 center">
+          {{ if eq .Kind 1 }}
+            {{ if gt (len .Optimized) 0 }}
+            <img alt="{{ .Title }}" src="{{ (index .Optimized 0).URL }}">
+            {{ else }}
+            <img alt="{{ .Title }}" src="{{ .URL }}">
+            {{ end }}
+          {{ else }}
+            &mdash;
+          {{ end }}
+          <br>
+        </td>
+        <td class="border-bottom border-dark p1">
+          {{ $codeSample := print `![](` .URL `)` }}
+          {{ if not (eq .Kind 1) }}
+            {{ $codeSample = print `[` .Title `](` .URL `)` }}
+          {{ end }}
+          <code class="small {{ if eq .Kind 1 }}nowrap{{ end }}">{{ $codeSample }}</code> {{ bytesToMb .Size }} 
+          <a href="{{ .URL }}" title="{{ T "open_file" }}">&#x1F50D;</a>
+          <a class="h4 pointer" title="{{ T "copy_to_clipboard" }}" onclick="copyToClp({{ $codeSample }})">&#x1F4CB;</a>
+        </td>
+        <td class="border-bottom border-dark p1">
+          {{ if eq .Kind 1 }}
+            {{ with .Optimized }}
+              {{ range . }}
+              <div class="nowrap">
+                {{ $codeSample := print `![](` .URL `)` }}
+                <code class="small">{{ $codeSample }}</code> {{ bytesToMb .Size }} 
+                <a class="h4" href="{{ .URL }}" title="{{ T "open_file" }}">&#x1F50D;</a>
+                <a class="h4 pointer" title="{{ T "copy_to_clipboard" }}" onclick="copyToClp({{ $codeSample }})">&#x1F4CB;</a>
+              </div>
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        </td>
+        <td class="border-bottom border-dark p1 center">
+          {{ if eq .Kind 1 }}
+            {{ $codeSample := print `<figure class="mt3 mb2"><img src="` .URL  `" alt="` .Title `"><figcaption class="flex flex-wrap h6 grey"><span class="mr3">` .Title `</span><span>&copy;&nbsp;` .Credits `</span></figcaption></figure>` }}
+            <a class="h4 pointer" onclick="copyToClp({{ $codeSample }})">&#x1F4CB;</a>
+          {{ end }}
+        </td>
+        <td class="border-bottom border-dark p1">{{ .Title }}</td>
+        <td class="border-bottom border-dark p1">{{ .Credits }}</td>
+        <td class="border-bottom border-dark p1 center">
+          <a class="btn-outline btn-small btn-blue rounded" href="/{{ langCode $.Language }}/admin/files/edit/{{ idToStr .ID }}">{{ T "edit" }}</a>
+          <a class="btn-outline btn-small btn-blue rounded" href="/{{ langCode $.Language }}/admin/files/delete_/{{ idToStr .ID }}">{{ T "delete" }}</a>
+        </td>
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
+</div>
+
+<footer class="mt2 col-12">
+  {{ if gt $.Data.PrevPageNo 0 }}
+    <button id="prev_page" class="btn rounded px2 py1" data-href="/{{ langCode $.Language }}/admin/files/?p={{ $.Data.PrevPageNo }}">&larr;</button>
+  {{ end }}
+  {{ if gt $.Data.NextPageNo 0 }}
+    <button id="next_page" class="btn rounded px2 py1" data-href="/{{ langCode $.Language }}/admin/files/?p={{ $.Data.NextPageNo }}">&rarr;</button>
+  {{ end }}
+</footer>
+
+<script>
+  // pages nav
+  var prevpage = document.querySelector("#prev_page");
+  if (prevpage) {
+    prevpage.addEventListener("click", function (e) { window.location.href = e.target.dataset.href; })
+  }
+  var nextpage = document.querySelector("#next_page");
+  if (nextpage) {
+    nextpage.addEventListener("click", function (e) { window.location.href = e.target.dataset.href; })
+  }
+
+  function copyToClp(x) {
+    var d = document, b = d.body, g = window.getSelection;
+    x = d.createTextNode(x);
+    b.appendChild(x);
+    if (b.createTextRange) {
+      var t = b.createTextRange();
+      t.moveToElementText(x);
+      t.select();
+      d.execCommand('copy');
+    } else {
+      var t = d.createRange();
+      t.selectNodeContents(x);
+      g().removeAllRanges();
+      g().addRange(t);
+      d.execCommand('copy');
+      g().removeAllRanges();
+    }
+    x.remove();
+  }
+
+</script>
+
+{{ end }}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="{{ .Language }}">
+    <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
+	{{ block "meta" . }}{{ end }}
+	<link href="/static/basscss.min.css" rel="stylesheet" />
+	<link href="/static/all.min.css" rel="stylesheet" />
+	{{/* Global site tag (gtag.js) - Google Analytics */}}
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-100272795-3"></script>
+	<script>
+	 window.dataLayer = window.dataLayer || [];
+	 function gtag(){dataLayer.push(arguments);}
+	 gtag('js', new Date());
+	 gtag('config', 'UA-100272795-3');
+	</script>
+	{{/* favicons */}}
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="msapplication-TileColor" content="#603cba">
+	<meta name="theme-color" content="#ffffff">
+	{{/* fb */}}
+	<meta property="og:image" content="{{ block "og-image" . }}{{ end }}">
+	<meta property="og:image:width" content="260">
+	<meta property="og:image:height" content="260">
+    </head>
+    <body class="user-ui m0 p0 {{ block "body_cls" . }}{{ end }}">
+	<script src="/static/vue.min.js" defer></script>
+	{{ template "header" . }}
+	<div>{{ template "main" . }}</div>
+	{{ block "body-bottom" . }} {{ end }}
+	{{ template "footer" . }}
+    </body>
+    <script src="/static/fa-regular.js" defer></script>
+    <script src="/static/fa-brands.js" defer></script>
+    <script src="/static/fa-fontawesome.js" defer></script>
+</html>

@@ -1,0 +1,117 @@
+{{ define "main" }}
+<nav class="flex items-baseline mb4">
+    <h1 class="m0 mr2">{{ T "content" }}</h1>
+    <a class="btn btn-blue py1 px2 rounded" href="/{{ langCode .Language }}/admin/content/new">{{ T "add" }}</a>
+</nav>
+<form action="filter" class="bg-admin-form flex flex-wrap m0 p2">
+	<div class="mr2">
+		<label class="mr1">{{ T "filter_by_topic" }}</label>
+		<select id="topicFilter" name="topic">
+			<option value="">{{ T "filter_by_topic_all" }}</option>
+			{{ range .Data.Topics }}
+				<option value="{{ idToStr .ID }}"
+					{{ if $.Data.CurrentTopic }}
+					{{ if eq $.Data.CurrentTopic.ID .ID }}selected{{ end }}
+					{{ end }}
+				>{{ .Title }}</option>
+			{{ end }}
+		</select>
+	</div>
+	<div class="mr2">
+		<label class="mr1">{{ T "filter_by_type" }}</label>
+		<select id="typeFilter" name="type">
+			<option value="">{{ T "filter_by_type_all" }}</option>
+			{{ range $i, $item := .Data.Types }}
+				<option value="{{ $i }}"
+					{{ if $.Data.CurrentType }}
+						{{ if eq (printf "%s" $.Data.CurrentType) (printf "%s" $item) }}selected{{ end }}
+					{{ end }}
+				>{{ T (printf "%s" $item) }}</option>
+			{{ end }}
+		</select>
+	</div>
+	<button type="submit">{{ T "filter_btn" }}</button>
+</form>
+
+<div class="overflow-scroll">
+	<table class="table">
+	    <thead>
+		<tr>
+		    <th class="p1">#</th>
+		    <th class="p1">{{ T "language" }}</th>
+		    <th class="p1">{{ T "title" }}</th>
+		    <th class="p1">{{ T "authors" }}</th>
+		    <th class="p1">{{ T "content_topic" }}</th>
+		    <th class="p1">{{ T "weight" }}</th>
+		    <th class="p1">{{ T "published_time" }}</th>
+		    <!-- <th class="p1">{{ T "updated_time" }}</th> -->
+		    <!-- <th class="p1">{{ T "scheduled_time" }}</th> -->
+		    <!-- <th class="p1">{{ T "published_time" }}</th> -->
+		    <th class="p1">{{ T "promoted" }}</th>
+		    <th class="p1">{{ T "public" }}</th>
+		    <th class="p1">{{ T "type" }}</th>
+		    <th class="p1">{{ T "actions" }}</th>
+		</tr>
+	    </thead>
+	    <tbody>
+		{{ range $i, $item := .Data.Content }}
+		    <tr>
+			<td class="border-bottom p1">{{ incr $i }}</td>
+			<td class="border-bottom p1">{{ $item.Language }}</td>
+			<td class="border-bottom p1">{{ $item.Title }}</td>
+			<td class="border-bottom p1">
+			    {{ range $item.Authors }}
+				{{ .FirstName }} {{ .LastName }}<br>
+			    {{ end }}
+			</td>
+			<td class="border-bottom p1">
+			    {{ range $t := $item.Topics }}
+				{{ .Title }}
+			    {{ end }}
+			</td>		
+			<td class="border-bottom p1">{{ $item.Weight }}</td>
+			<!-- <td class="border-bottom p1">{{ fmtTime $item.Created }}</td>-->
+			<!-- <td class="border-bottom p1">
+				{{ if not (zeroTime $item.Updated) }}
+					{{ fmtTime $item.Updated }}
+				{{ end }}
+			</td> -->
+			<!-- <td class="border-bottom p1">
+				{{ if not (zeroTime $item.Scheduled) }}
+					{{ fmtTime $item.Scheduled }}
+				{{ end }}
+			</td> -->
+			<td class="border-bottom p1">{{ fmtTime $item.Published }}</td>
+			<td class="border-bottom p1 center h1">
+				{{ if $item.Promoted }}
+					<span>&#x25cf;</span>
+				{{ end }}
+			</td>
+			<td class="border-bottom p1 center h1">
+				{{ if $item.Public }}
+					<span style="color: limegreen;">&#x25cf;</span>
+				{{ else }}
+					<span style="color: orangered;">&#x25cf;</span>
+				{{ end }}
+			</td>
+			<td class="border-bottom p1">{{ T (printf "%s" $item.Type) }}</td>
+			<td class="border-bottom p1">
+			    <a class="btn-outline btn-small btn-blue rounded" href="/{{ $.Language }}/admin/content/edit/{{ idToStr $item.ID }}">{{ T "edit" }}</a>
+			    {{ $delref := (printf "/%s/admin/content/delete/%s" $.Language (idToStr $item.ID)) }}
+			    <a class="btn-outline btn-small btn-blue rounded" onclick="deleteContent(this, {{ $delref }}, {{ $item.Title }})" href="#" title="{{ T "remove_dependent_content_first" }}">{{ T "delete" }}</a>
+			</td>
+		    </tr>
+		{{ end }}
+	    </tbody>
+	</table>
+</div>
+
+<script>
+ function deleteContent(target, link, title) {
+     if (confirm('Точно удалить материал?')) {
+	 document.location.pathname = link;
+     }
+     return false;
+ }
+</script>
+{{ end }}

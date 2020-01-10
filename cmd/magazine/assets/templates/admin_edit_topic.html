@@ -1,0 +1,37 @@
+{{ define "main" }}
+<h1 class="m0 mb4">{{ T "editing"}}: <em>{{ .Data.Topic.Title }}</em></h1>
+<div class="bg-admin-form p3">
+	<form class="col-6" method="post" action="/{{ langCode .Language }}/admin/topics/">
+		<input type="hidden" name="ID" value="{{ idToStr .Data.Topic.ID }}">
+		<div class="mb2 flex flex-column">
+		    <label>{{ T "slug" }}</label>
+		    <input type="text" name="Slug" value="{{ .Data.Topic.Slug }}" disabled>
+		</div>
+		<div class="mb2 flex flex-column">
+		    <label>{{ T "title" }}</label>
+		    <input type="text" name="Title" value="{{ .Data.Topic.Title }}">
+		</div>
+		<div class="mb2 flex flex-column">
+		    <label>{{ T "choose_language" }}</label>
+		    <select name="Language">
+			{{ range .Data.AvailableLanguages }}
+			    <option value="{{ langCode . }}" {{ if eq $.Data.Topic.Language (langCode .) }}selected{{ end }}>{{ langName . }}</option>
+			{{ end }}
+		    </select>
+		</div>
+		<div class="mb2 flex flex-column">
+		    <label>{{ T "weight" }}</label>
+		    <input type="number" name="Weight" value="{{ .Data.Topic.Weight }}">
+		</div>
+		<div class="mb2">
+		    <label>{{ T "public"}} </label>
+		    <input type="checkbox" name="Public" {{ if .Data.Topic.Public }}checked{{ end }}>
+		</div>
+		<div class="mb2">
+		    <label>{{ T "page"}} </label>
+		    <input type="checkbox" name="Page" {{ if .Data.Topic.Page }}checked{{ end }}>
+		</div>
+		<button class="btn btn-blue py1 px2 rounded" type="submit">{{ T "save" }}</button>
+	</form>
+</div>
+{{ end }}

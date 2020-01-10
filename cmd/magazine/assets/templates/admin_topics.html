@@ -1,0 +1,39 @@
+{{ define "main" }}
+<nav class="flex items-baseline mb4">
+    <h1 class="m0 mr2">{{ T "topics" }}</h1>
+    <a class="btn btn-blue py1 px2 rounded" href="/{{ langCode .Language }}/admin/topics/new">{{ T "add" }}</a>
+</nav>
+<div class="overflow-scroll">
+	<table class="table">
+	    <thead>
+		<tr>
+		    <th class="p1">{{ T "language" }}</th>
+		    <th class="p1">{{ T "title" }}</th>
+		    <th class="p1">{{ T "slug" }}</th>
+		    <th class="p1">{{ T "public" }}</th>
+		    <th class="p1">{{ T "page" }}</th>
+		    <th class="p1">{{ T "weight" }}</th>
+		    <th class="p1">{{ T "content" }}</th>
+		    <th class="p1">{{ T "actions" }}</th>
+		</tr>
+	    </thead>
+	    <tbody>
+		{{ range .Data.Topics }}
+		    <tr>
+			<td class="border-bottom p1">{{ .Language }}</td>
+			<td class="border-bottom p1">{{ .Title }}</td>
+			<td class="border-bottom p1">{{ .Slug }}</td>
+			<td class="border-bottom p1">{{ .Public }}</td>
+			<td class="border-bottom p1">{{ .Page }}</td>
+			<td class="border-bottom p1">{{ .Weight }}</td>
+			<td class="border-bottom p1">{{ .Amount }}</td>
+			<td class="border-bottom p1">
+			    <a class="btn-outline btn-blue btn-small rounded" href="/{{ langCode $.Language }}/admin/topics/edit/{{ idToStr .ID }}">{{ T "edit" }}</a>
+			    <a class="btn-outline btn-blue btn-small rounded" href="/{{ langCode $.Language }}/admin/topics/delete/{{ idToStr .ID }}" title="{{ T "remove_dependent_content_first" }}">{{ T "delete" }}</a>
+			</td>
+		    </tr>
+		{{ end }}
+	    </tbody>
+	</table>
+</div>
+{{ end }}

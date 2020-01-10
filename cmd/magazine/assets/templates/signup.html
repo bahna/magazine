@@ -1,0 +1,36 @@
+{{ define "meta" }}
+<title>{{ T "signup" }}</title>
+{{ end }}
+
+{{ define "main" }}
+<div class="py4 my4 flex flex-column flex-wrap items-center">
+    <header class="flex flex-wrap items-baseline">
+	<h1 class="m0 mb2 mr2">{{ T "user_registration" }}</h1>
+	<a class="neutral-secondary-accent-link" href="/{{ langCode .Language }}/login/">{{ T "login_title" }}</a>
+    </header>
+
+    <form class="col-6 bg-white" method="post" action="/{{ langCode .Language }}/signup">
+	<div class="mb2 flex flex-column">
+	    <label>{{ T "email"}} </label>
+	    <input type="email" name="Email" required>
+	</div>
+	<div class="mb2 flex flex-column">
+	    <label>{{ T "first_name"}} </label>
+	    <input type="text" name="FirstName" required>
+	</div>
+	<div class="mb2 flex flex-column">
+	    <label>{{ T "last_name"}} </label>
+	    <input type="text" name="LastName" required>
+	</div>
+	<div class="mb2 flex flex-column">
+	    <label>{{ T "password"}} </label>
+	    <input type="password" name="Password" required>
+	</div>
+	<div class="mb2 flex flex-column">
+	    <label>{{ T "password_confirm"}} </label>
+	    <input type="password" name="PasswordConfirm" required>
+	</div>
+	<button class="btn px2 py1" type="submit">{{ T "add" }}</button>
+    </form>
+</div>
+{{ end }}

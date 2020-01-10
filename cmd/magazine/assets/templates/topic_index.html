@@ -1,0 +1,100 @@
+{{ define "meta" }}
+<title>{{ if .Data.Topic }}{{ .Data.Topic.Title }}{{ else }}{{ T "bahna" }} — {{ T "bahna_tagline" }}{{ end }}</title>
+{{ end }}
+
+{{ define "main" }}
+
+<section class="py4 px2 smooth-transition flex flex-wrap flex-auto bg-light-grey">
+  <!-- posts -->
+  <section class="sm-col-12 md-col-8 flex flex-wrap">
+    <!-- <h1 class="col-12 m0 p0 h1 mx2 mb3">{{ .Data.Topic.Title }}</h1> -->
+    {{ range .Data.Content }}
+      <!-- article -->
+      {{ if eq .Type 0 }}
+        {{ if and (gt (len .CoverExternal) 0) .Promoted }}
+          {{ template "cardBackgroundImage" . }}
+        {{ end }}
+        <div id="card-wrapper-{{ idToStr .ID }}" class="sm-col-12 {{ if .Promoted }}md-col-12{{ else }}md-col-6{{ end }} flex">
+          <section id="card-{{ idToStr .ID }}" class="card-simple {{ if .Promoted }}promoted{{ end }} rounded mx2 pb2 mb3 flex flex-column flex-auto">
+            {{ if and (gt (len .CoverExternal) 0) (not .Promoted) }}
+              {{ template "cardImage" . }}
+            {{ end }}
+            <h2 class="m0 {{ if .Promoted }}h2{{ else }}h3{{ end }} px3 pt2 flex-auto"><a href="/{{ langCode $.Language }}/{{ (index .Topics 0).Slug }}/{{ .Slug }}/" class="neutral-secondary-accent-link {{ if .Promoted }}white text-shadow{{ end }}">{{ .Title }}</a></h2>
+            <footer class="flex flex-wrap mt2 px3 h6 items-baseline">
+              <span class="date rounded">{{ pubDate . }}</span>
+            </footer>
+          </section>
+          {{ template "clickListener" . }}
+        </div>
+      <!-- banner -->
+      {{ else if eq .Type 1 }}
+        {{ template "cardBackgroundImage" . }}
+        <div id="card-wrapper-{{ idToStr .ID }}" class="sm-col-12 {{ if .Promoted }}md-col-12{{ else }}md-col-6{{ end }} flex">
+          <section id="card-{{ idToStr .ID }}" class="banner {{ if .Promoted }}promoted{{ end }} mx2 pb2 mb3 flex flex-column flex-auto justify-center items-center">
+            <h2 class="m0 mt3 h3 px2 p1 rounded center sm-col-12 {{ if .Promoted }}md-col-7{{ else }}md-col-10{{ end }}">
+              <a href="{{ .LinkTo }}" class="white">{{ .Title }}</a>
+            </h2>
+            <footer class="flex flex-wrap mt2 px3 h6 items-baseline">
+              <span class="type-label rounded">{{ T (printf "%s" .Type) }}</span>
+            </footer>
+          </section>
+          {{ template "clickListenerBanner" . }}
+        </div>
+      {{ end }}
+    {{ end }}
+
+    <footer class="mt1 col-12">
+      {{ if gt $.Data.PrevPageNo 0 }}
+      <a class="btn rounded px2 py1" href="/{{ langCode $.Language }}/{{ $.Data.Topic.Slug }}?p={{ $.Data.PrevPageNo }}">{{ T "prev_content_page" }}</a>
+      {{ end }}
+      {{ if gt $.Data.NextPageNo 0 }}
+      <a class="btn rounded px2 py1" href="/{{ langCode $.Language }}/{{ $.Data.Topic.Slug }}?p={{ $.Data.NextPageNo }}">{{ T "next_content_page" }}</a>
+      {{ end }}
+    </footer>
+  </section>
+
+  <!-- events -->
+  <section class="sm-col-12 md-col-4"></section>
+</section>
+{{ end }}
+
+{{ define "clickListener" }}
+<script>
+  var card = document.querySelector("#card-{{ idToStr .ID }}");
+  card.addEventListener("click", function (event) {
+    window.location.pathname = "/{{ .Language }}/{{ (index .Topics 0).Slug }}/{{ .Slug }}/";
+  });
+</script>
+{{ end }}
+
+{{ define "clickListenerBanner" }}
+<script>
+  var card = document.querySelector("#card-{{ idToStr .ID }}");
+  card.addEventListener("click", function (event) {
+    window.location = "{{ .LinkTo }}";
+  });
+</script>
+{{ end }}
+
+{{ define "cardBackgroundImage" }}
+<style>
+  #card-{{ idToStr .ID }} {
+    background-image: url("{{ .CoverExternal }}");
+    background-color: rgb(36, 39, 36);
+    background-size: cover;
+    background-position: center center;
+  }
+</style>
+{{ end }}
+
+{{ define "cardImage" }}
+<style>
+  #card-image-{{ idToStr .ID }} {
+    background-image: url("{{ .CoverExternal }}");
+    background-color: rgb(36, 39, 36);
+    background-size: cover;
+    background-position: center center;
+  }
+</style>
+<div id="card-image-{{ idToStr .ID }}" class="card-image rounded-top"></div>
+{{ end }}

@@ -1,0 +1,22 @@
+{{ define "meta" }}
+<title>{{ T "login_title" }}</title>
+{{ end }}
+
+{{ define "main" }}
+<div class="py4 my4 flex flex-column flex-wrap items-center">
+    <header class="flex flex-wrap items-baseline">
+		<h1 class="m0 mb2 mr2">{{ T "password_restore_title" }}</h1>
+		<a class="neutral-secondary-accent-link" href="/{{ langCode .Language }}/login/">{{ T "login_link" }}</a>
+    </header>
+
+    <form class="col-6 bg-white" method="post" action="/{{ langCode .Language }}/restore">
+		<div class="mb2 flex flex-column">
+			<label>{{ T "email" }}</label>
+			<input type="text" name="Email.Address" required>
+		</div>
+		<div class="flex flex-wrap items-baseline">
+			<button class="btn px2 py1" type="submit">{{ T "restore_password" }}</button>
+		</div>
+    </form>
+</div>
+{{ end }}

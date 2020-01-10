@@ -1,0 +1,9 @@
+{
+  "files.associations": {
+    "*.html": "gohtml"
+  },
+  "emmet.includeLanguages": {
+    "gohtml": "html"
+  },
+  "editor.tabCompletion": true
+}

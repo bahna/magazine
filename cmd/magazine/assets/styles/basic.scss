@@ -1,0 +1,795 @@
+// variables
+@font-face {
+  font-family: "Ferry";
+  src: url("/static/Ferry.otf");
+}
+
+@font-face {
+  font-family: "Stag Sans LC Thin";
+  src: url("/static/Stag Sans LC-Thin.otf");
+}
+
+@font-face {
+  font-family: "Stag Sans LC Light";
+  src: url("/static/Stag Sans LC-Light.otf");
+}
+
+@font-face {
+  font-family: "Stag Sans LC Book";
+  src: url("/static/Stag Sans LC-Book.otf");
+}
+
+@font-face {
+  font-family: "Stag Sans LC Medium";
+  src: url("/static/Stag Sans LC-Medium.otf");
+}
+
+@font-face {
+  font-family: "Stag Sans LC Bold";
+  src: url("/static/Stag Sans LC-Bold.otf");
+}
+
+@font-face {
+  font-family: "Stag Sans LC Black";
+  src: url("/static/Stag Sans LC-Black.otf");
+}
+
+$c-base: rgb(36, 39, 36); // #33393b; //#00dd00;
+$c-accent: #ffe100;
+$c-secondary-accent: hsla(140, 88%, 52%, 1); //rgb(0, 230, 172); //rgb(0, 230, 153); //f;
+$c-secondary-accent-dark: hsla(140, 88%, 40%, 1); 
+$c-dark: $c-base; //rgb(35, 33, 34); // raisin black
+$c-light: cornsilk;
+$light-grey: #F3F4F5; //#F0F3F3; //f5f6f7;
+$white-blue: #f8f9fa;
+
+//dark green #41834b 48a156 3ea56a
+
+$transition: all .2s ease-out;
+$shadow: 0 2px 1px darken($light-grey, 3%);
+$shadow-sparse: 0 2px 20px darken($light-grey, 10%);
+$shadow-sparse2: 0 0px 2px darken($light-grey, 15%);
+$dark-shadow: 0 2px 1px $c-dark;
+$font: "Helvetica Neue", Helvetica, Arial, Verdana, Geneva, sans-serif;
+
+$light-bg: whitesmoke;
+
+// basic
+
+body {
+  color: $c-dark;
+  font-family: $font;
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 1em;
+}
+
+h2 {
+  line-height: 1.1em;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+  line-height: .5em;
+}
+
+figcaption {
+  font-size: .75rem;
+  line-height: 1.75em;
+  margin-top: .5em;
+}
+
+hr {
+  margin-top: 3em;
+  border: 2px solid $light-grey;
+}
+
+small {
+  display: block;
+  //color: lighten($c-dark, 50%);
+  font-size: .75rem;
+  line-height: 1.75em;
+  margin-top: .75em;
+}
+
+.h1 {
+  font-family: "Stag Sans LC Bold", Helvetica, sans-serif;
+  @media (min-width: 800px) {
+    font-size: 3rem;
+  }
+  line-height: 1em;
+}
+
+.h2 {
+  font-family: "Stag Sans LC Book", Helvetica, sans-serif;
+  line-height: 1.3em;
+}
+
+.h3 {
+  font-family: "Stag Sans LC Book", Helvetica, sans-serif;
+  line-height: 1.3em;
+}
+
+a {
+  color: $c-secondary-accent; //blue; //$c-base;
+  text-decoration: none;
+  // &:hover, &:focus {
+    //color: red; // $c-accent;
+    //text-decoration: underline;
+  // }
+  transition: $transition;
+}
+
+input {
+  font-size: 1em;
+  line-height: 1.5em;
+  padding: .2em .4em;
+}
+
+.date {
+  background: $light-grey;
+  padding: .1em .5em;
+}
+
+.type-label {
+  border: 1px solid rgba(255, 245, 230, 0.7);
+  padding: .1em .5em;
+  color: rgba(255, 245, 230, 1);
+}
+
+.type-label-dark {
+  border: 1px solid $c-dark;
+  padding: .1em .5em;
+  color: $c-dark;
+}
+
+.select {
+  // background: white url("/static/select-arr.svg") no-repeat right .4em center;
+  background: $light-bg url("/static/select-arr.svg") no-repeat right .4em center;
+  color: $c-dark;
+  border: none;
+  border-radius: 0;
+  padding: .4em;
+  padding-right: 2em;
+  font-family: "Stag Sans LC Medium", Helvetica, sans-serif;
+  font-size: 1em;
+  appearance: none;
+  min-width: 5em;
+  box-shadow: $shadow;
+}
+
+// .material {
+//   .select {
+//     background: $light-bg url("/static/select-arr.svg") no-repeat right .4em center;
+//   }
+// }
+
+textarea {
+  padding: .4em;
+  font-family: $font;
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+fieldset {
+  border: 1px solid $c-dark;
+}
+
+.bg-admin-form {
+  background: cornsilk;
+}
+
+// form {
+//   background: cornsilk;
+//   padding: 2em;
+// }
+
+.user-ui form {
+  background: none;
+  padding: 0;
+}
+
+footer {
+  font-size: 1.15em;
+  line-height: 1.5em;    
+}
+
+.btn {
+  border: 0;
+  outline: 0;
+  margin: 0;
+  color: white;
+  cursor: pointer;
+  font-size: inherit;
+  background: $c-base;
+  transition: $transition;
+  &:hover, &:focus {
+    background: $c-secondary-accent;
+    color: white;
+  }
+  
+  .outline {
+    background: transparent;
+    border: $c-base;
+    color: $c-base;	
+    &:hover, &:focus {
+      border: $c-accent;
+      color: $c-base;
+    }
+  }
+  
+  .small {
+    font-size: .75em;
+  }
+}
+
+.btn-outline {
+  border: 0;
+  outline: 0;
+  margin: 0;
+  cursor: pointer;
+  font-size: inherit;
+  transition: $transition;
+  background: transparent;
+  border: 1px solid $c-base;
+  color: $c-base;	
+  &:hover, &:focus {
+    background: $c-base;
+    color: white;
+  }
+}
+.btn-small {
+  font-size: .75em;
+  padding: .2em .4em;
+}
+
+.table {
+  width: 100%;
+  
+  td:hover {
+    background: $c-light;
+    transition: $transition;
+  }
+  
+  thead {
+    background:  $c-light;
+  }    
+}
+
+.border, .border-bottom, .border-left, .border-right {
+  border-color: $c-light;
+
+  &.border-dark {
+    border-color: $light-grey;
+  }
+}
+
+.series {
+  background-color: $c-dark;
+  color: white;
+}
+
+.bg-reset {
+  background-color: none;
+}
+
+.bg-accent {
+  background-color: $c-accent;
+}
+
+.bg-secondary-accent {
+  background-color: $c-secondary-accent;
+}
+
+.bg-light-grey {
+  background-color: $light-grey;
+}
+
+.bg-dark {
+  background-color: $c-dark;
+  color: white;
+}
+
+.bg-white {
+  background-color: white;
+}
+
+.bg-white-hover {
+  background-color: white;
+  color: $c-dark;
+  transition: $transition;
+  
+  &:hover, &:focus {
+    background-color: $c-base;
+    color: white;
+  }    
+}
+
+.bg-base {
+  background-color: $c-base;
+  color: white;
+  transition: $transition;
+  
+  a {
+    color: white;
+    &:hover, &:focus {
+      color: $c-accent;
+    }
+  }    
+}
+
+.bg-base-hover {
+  background-color: $c-base;
+  color: white;
+  transition: $transition;
+  
+  &:hover, &:focus {
+    background-color: white;
+    color: $c-dark;
+    a {
+      color: $c-dark;
+    }
+  }
+  
+  a {
+    color: white;
+    &:hover, &:focus {
+      color: $c-accent;
+    }
+  }    
+}
+
+.bg-accent-hover {
+  background-color: $c-accent;
+  color: $c-dark;
+  transition: $transition;
+  
+  a {
+    color: $c-dark;
+  }
+  
+  &:hover, &:focus {
+    background-color: $c-dark;
+    color: white;
+    a {
+      color: white;
+      &:hover, &:focus {
+        color: $c-accent;
+      }
+    }
+  }
+}
+
+.light-grey {
+  color: $light-grey;
+}
+
+.grey {
+  color: lighten($c-dark, 50%);
+}
+
+.logo-rotated {
+  transform: rotate(-90deg);
+  font-family: "Stag Sans LC";
+  position: absolute;
+  top: 12.5em;
+  left: -9.4em;
+  
+  .light {
+    font-size: 14pt;
+    font-weight: 100;
+    letter-spacing: .1ex;
+    font-family: "Stag Sans LC Thin";
+  }
+  
+  .heavy {
+    font-size: 40pt;
+    font-weight: 900;
+    // font-family: "Stag Sans LC Black";
+  }
+}
+
+.secondary-accent {
+  color: $c-secondary-accent;
+}
+
+.accent {
+  color: $c-accent;
+}
+
+.logo {
+  .light {
+    font-size: 14pt;
+    letter-spacing: .1ex;
+    font-family: "Stag Sans LC Light" !important;
+    font-family: $font;
+  }
+  
+  .heavy {
+    color: $c-dark;
+    font-size: 1.5rem;
+    font-family: "Ferry";
+    // font-family: "Stag Sans LC Bold";
+    font-weight: 900;
+    letter-spacing: .3ex;
+    /* font-size: 2.25rem; */
+    /* font-family: "Stag Sans LC Bold"; */
+  }
+}
+
+.article-width {
+  //max-width: 50em;
+  font-size: 1.15em;
+  line-height: 1.5em;
+  // img {
+  //   margin: 1em 0;
+  // }
+}
+
+.article-width, .lede {
+  p {
+    margin-top: 0;
+    margin-bottom: .75em;
+  }
+}
+
+.banner {
+  cursor: pointer;
+  background: $c-dark;
+  box-shadow: $shadow-sparse;
+  min-height: 10em;
+  font-family: 'Stag Sans LC Light';
+
+  .h2, .h3 {
+    font-family: 'Stag Sans LC Light';
+    text-shadow: $c-dark 0 1px 35px;
+    letter-spacing: 0.1ex;
+  }
+
+  &:hover, &:focus {
+    box-shadow: $shadow-sparse2;
+  }
+
+  &.promoted {
+    .h2 {
+      font-size: 2em;
+      line-height: 1.15em;
+      font-family: 'Stag Sans LC Light';
+    }
+  }
+}
+
+.card-simple {
+  cursor: pointer;
+  min-height: 10em;
+  background: white;
+  box-shadow: $shadow-sparse; 
+
+  &:hover, &:focus {
+    box-shadow: $shadow-sparse2;
+    h2 a {
+      color: $c-secondary-accent;
+    }
+  }
+
+  .card-image {
+    height: 10em;
+  }
+  
+  &.promoted {
+    min-height: 20em;
+
+    .h2 {
+      font-size: 2em;
+      font-family: 'Stag Sans LC Medium';
+      line-height: 1.15em;
+    }
+  }
+}
+
+.series-card {
+  cursor: pointer;
+  min-height: 10em;
+  background: $c-dark;
+
+  h2 {
+    letter-spacing: .1ex;
+  }
+  &:hover, &:focus {
+    h2 a {
+      color: $c-secondary-accent;
+    }
+  }
+
+}
+
+.research-card {
+  cursor: pointer;
+  min-height: 23em;
+  max-width: 16.5em;
+  background-image: radial-gradient(ellipse at bottom, rgb(63, 66, 90), rgb(125, 128, 141) 170%); 
+
+  h2 {
+    letter-spacing: .1ex;
+  }
+  &:hover, &:focus {
+    h2 a {
+      color: ($c-secondary-accent);
+    }
+  }
+
+}
+
+.event-card {
+  cursor: pointer;
+  background: transparent;
+  line-height: 1.1em;
+  
+  .event-date {
+    text-transform: uppercase;
+  }
+
+  &:hover, &:focus {
+    a {
+      color: $c-secondary-accent;
+    }
+  }
+}
+
+.audio-card {
+  background: transparent;
+  // box-shadow: $shadow-sparse; 
+
+  &:hover, &:focus {
+    h2 a {
+      color: $c-secondary-accent;
+    }
+    // box-shadow: $shadow-sparse2;
+  }
+}
+
+.card {
+  min-height: 10em;
+  // text-transform: uppercase;
+  // letter-spacing: .35ex;
+  // box-shadow: $shadow;
+  // background-color: $light-bg;
+  background: transparent;
+  @media (min-width: 800px) {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+  padding-left: 24px;
+  padding-right: 24px;
+  
+  &:hover, &:focus {
+    cursor: pointer;
+    box-shadow: none;
+    a {
+      color: white;
+    }
+  }
+  
+  a {
+    color: $c-dark;
+    &:hover, &:focus {
+      color: $c-accent;
+    }
+  }
+}
+
+.shadow {
+  box-shadow: $shadow-sparse;
+  &:hover, &:focus {
+    box-shadow: $shadow-sparse2;
+  }
+}
+
+.text-shadow {
+  text-shadow: $c-dark 0 1px 35px;
+}
+
+.text-shadow-thin {
+  text-shadow: $c-dark 0 1px 1px;
+}
+
+.blue-link {
+  color: blue;
+  text-decoration: none;
+  &:hover, &:focus {
+    color: red;
+    text-decoration: none;
+  }
+}
+
+.neutral-link {
+  color: $c-dark;
+  &:hover, &:focus {
+    color: $c-dark;
+    text-decoration: underline;
+  }
+}
+
+.dimmed-link {
+  color: lighten($c-dark, 60%);
+  text-decoration: none;
+  &:hover, &:focus {
+    color: $c-dark;
+    text-decoration: none;
+  }
+}
+
+.dimmed-accent-link {
+  color: lighten($c-dark, 60%);
+  text-decoration: none;
+  &:hover, &:focus {
+    color: $c-accent;
+    text-decoration: none;
+  }
+}
+
+.neutral-accent-link {
+  color: $c-dark;
+
+  &.white {
+    color: white;
+    &:hover, &:focus {
+      color: $c-accent;
+      text-decoration: none;
+    }
+  }
+  
+  &:hover, &:focus {
+    color: $c-accent;
+    text-decoration: none;
+  }
+}
+
+.white {
+  color: white;
+}
+
+.neutral-secondary-accent-link {
+  color: $c-dark;
+
+  &.white {
+    color: white;
+  }
+
+  &:hover, &:focus {
+    color: $c-secondary-accent;
+    text-decoration: none;
+  }
+  
+  &.active {
+    color: $c-secondary-accent;
+  }
+}
+
+.neutral-secondary-accent-underlined-link {
+  color: $c-dark;
+  border-bottom: 4px solid $c-secondary-accent;
+  &:hover, &:focus {
+    color: $c-secondary-accent;
+    text-decoration: none;
+  }
+}
+
+.smooth-transition {
+  transition: $transition;
+}
+
+.rounded-a-lot {
+  border-radius: 10em;
+}
+
+.rounded-rb-corner-a-lot {
+  border-radius: 0 0 10em 0;
+}
+
+.rounded-lb-corner-a-lot {
+  border-radius: 0 0 0 10em;    
+}
+
+.btn.btn-blue {
+  background: blue;
+  color: white;
+  &:hover, &:focus {
+    background: red;
+  }
+}
+
+.btn-outline.btn-blue {
+  border-color: blue;
+  color: blue;
+  &:hover, &:focus {
+    background: blue;
+    color: white;
+  }
+}
+
+.material-cover {
+  min-height: 270px;
+}
+
+.lede {
+  font-size: 2.1em; //1.5em;
+  line-height: 1.2em; //1.25em;
+  font-family: "Stag Sans LC Light", "Helvetica Neue", Helvetica, sans-serif;
+
+  a {
+    text-decoration: none !important;
+  }
+}
+
+.material-text {
+  .article-width {
+    figure {
+      margin: 2em 0 1.5em 0;
+    }
+  }
+
+  h2 {
+    margin-top: 2.5em;
+  }
+
+  a {
+    color: $c-secondary-accent-dark;
+    //text-decoration: underline;
+    &:hover, &:focus {
+      color: $c-secondary-accent;
+      //text-decoration: underline;
+    }
+  }
+
+  blockquote {
+    font-size: 2em;
+    line-height: 1.2em;
+    font-family: "Stag Sans LC Light", "Helvetica Neue", Helvetica, sans-serif;
+    font-weight: 200;
+  }
+}
+
+.bg-illustration {
+  // background: $light-grey;
+  background: center top / 150% url("/static/qa-bg@2x.png") no-repeat;
+}
+
+.user-ui {
+  td {
+    vertical-align: top;
+    padding: 0 1em 1em 0;
+  }
+}
+
+.bahna-land-label {
+  position: absolute;
+  transform: rotate(-90deg);
+  top: 240px;
+  left: -60px;
+  width: 10em;
+  line-height: 2.5em;
+  border-radius: 0 0 1em 0;
+}
+
+.border-thick-lightgrey {
+  border-bottom: 3px solid $light-grey;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.forward {
+  z-index: 99;
+}

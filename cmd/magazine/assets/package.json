@@ -1,0 +1,30 @@
+{
+  "name": "assets",
+  "version": "1.0.0",
+  "description": "",
+  "main": " ",
+  "scripts": {
+    "css_process": "node-sass --output-style compressed --source-map true --source-map-embed styles/main.scss > static/all.css && npm run css_build",
+    "css_build": "postcss --use autoprefixer -b '> 5%' < static/all.css > static/all.min.css && rm static/all.css",
+    "css_watch": "onchange 'styles/**/*.scss' -- npm run css_process",
+    "js_watch": "babel --source-maps --no-comments --minified --out-dir static -w scripts",
+    "watch": "npm run css_watch && npm run js_watch"
+  },
+  "author": "Ihar Suvorau",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^7.1.6",
+    "babel-cli": "^6.26.0",
+    "node-sass": "^4.9.3",
+    "npm": "^5.7.1",
+    "onchange": "^3.2.1",
+    "postcss-cli": "^4.1.1",
+    "siema": "^1.5.1",
+    "vue": "^2.5.9",
+    "webpack": "^4.1.1",
+    "whatwg-fetch": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1"
+  }
+}

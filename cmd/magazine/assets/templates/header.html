@@ -1,0 +1,45 @@
+{{ define "header" }}
+<header class="flex flex-wrap">
+  <section class="flex flex-wrap col-12 border-thick-lightgrey">
+    <nav class="py2 logo flex flex-auto flex-wrap items-center">
+      <div class="ml2 flex flex-wrap items-baseline">
+        <a class="heavy neutral-secondary-accent-link mr2" href="/{{ langCode .Language }}/">Bahna</a>
+        <span class="light mt1">{{ T "bahna_tagline" }}</span>
+      </div>
+    </nav>
+
+    <div class="flex flex-wrap items-center flex-auto justify-end">
+      {{ range .Data.Pages }}
+        <a href="/{{ langCode $.Language }}/{{ (index .Topics 0).Slug }}/{{ .Slug }}/" class="mr2 neutral-secondary-accent-link">{{ .Title }}</a>
+      {{ end }}
+      <nav class="flex pl2 flex-wrap">
+        <div id="choose-language"></div>
+      </nav>
+      <nav class="xs-hide px2 py1 flex flex-wrap">
+        {{ if not .CurrentUser }}
+          <a href="/{{ langCode .Language }}/login" class="mr2 neutral-secondary-accent-link">{{ T "login_link" }}</a>
+          <!-- <a href="/{{ langCode .Language }}/signup" class="mr2 neutral-secondary-accent-link">{{ T "signup_link" }}</a> -->
+        {{ end }}
+        {{ with .CurrentUser }}
+          <a href="/{{ langCode $.Language }}/admin/" class="mr2 neutral-secondary-accent-link">{{ T "admin_link" }}</a>
+          <a href="/{{ langCode $.Language }}/logout" class="mr2 neutral-secondary-accent-link" title="{{ T "logged_in_as_user "}} {{ .Email.Address }}">{{ T "logout_link" }}</a>
+        {{ end }}
+      </nav>
+    </div>
+  </section>
+
+  {{ with .Data.Topics }}
+    <nav class="px2 py1 col-12 flex flex-wrap justify-start items-baseline">
+      {{ range . }}
+        <a href="/{{ langCode $.Language }}/{{ .Slug }}/" class="mr3 neutral-secondary-accent-link bold {{ if $.Data.Topic }}{{ if (eq $.Data.Topic.Title .Title) }}active{{ end }}{{ end }}">{{ .Title }}</a>
+      {{ end }}
+    </nav>
+  {{ end }}
+</header>
+
+<script>
+ var languages = {{ .Data.AvailableLanguages }};
+ var topics = {{ .Data.Topics }};
+</script>
+<script src="/static/header.js" defer></script>
+{{ end }}

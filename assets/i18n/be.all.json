@@ -1,0 +1,455 @@
+{
+  "Administrator": {
+    "other": "Адміністратар"
+  },
+  "Apr": {
+    "other": "Apr"
+  },
+  "Article": {
+    "other": "Артыкул"
+  },
+  "ArticleSeries": {
+    "other": "Серыя"
+  },
+  "Audio": {
+    "other": "Падкаст"
+  },
+  "Aug": {
+    "other": "Aug"
+  },
+  "Author": {
+    "other": "Аўтар"
+  },
+  "Banner": {
+    "other": "Банер"
+  },
+  "Dec": {
+    "other": "Dec"
+  },
+  "Event": {
+    "other": "Падзея"
+  },
+  "Expert": {
+    "other": "Эксперт"
+  },
+  "Feb": {
+    "other": "Feb"
+  },
+  "Jan": {
+    "other": "Jan"
+  },
+  "Jul": {
+    "other": "Jul"
+  },
+  "Jun": {
+    "other": "Jun"
+  },
+  "Mar": {
+    "other": "Mar"
+  },
+  "May": {
+    "other": "May"
+  },
+  "Nov": {
+    "other": "Nov"
+  },
+  "Oct": {
+    "other": "Oct"
+  },
+  "Page": {
+    "other": "Старонка"
+  },
+  "Photoreport": {
+    "other": "Фотарэпартаж"
+  },
+  "Research": {
+    "other": "Даследванне"
+  },
+  "Sep": {
+    "other": "Sep"
+  },
+  "Video": {
+    "other": "Відэа"
+  },
+  "Visitor": {
+    "other": "Наведвальнік"
+  },
+  "actions": {
+    "other": "Actions"
+  },
+  "active": {
+    "other": "Active"
+  },
+  "add": {
+    "other": "Add"
+  },
+  "add_new_content": {
+    "other": "Add new content"
+  },
+  "add_new_user": {
+    "other": "Add a user"
+  },
+  "add_topic_link": {
+    "other": "Add a topic"
+  },
+  "admin_index": {
+    "other": "Dashboard"
+  },
+  "admin_link": {
+    "other": "Dashboard"
+  },
+  "and_more": {
+    "other": "болей"
+  },
+  "answered_by": {
+    "other": "Answered by"
+  },
+  "ask_question": {
+    "other": "Ask a Question"
+  },
+  "ask_question_done_title": {
+    "other": "Question is sent"
+  },
+  "ask_question_title": {
+    "other": "Ask Your Question"
+  },
+  "author": {
+    "other": "Аўтар"
+  },
+  "authors": {
+    "other": "Аўтары"
+  },
+  "bahna": {
+    "other": "Bahna"
+  },
+  "bahna_tagline": {
+    "other": "non-profit wildlife protection"
+  },
+  "body": {
+    "other": "Body"
+  },
+  "choose_file": {
+    "other": "Choose a file"
+  },
+  "choose_language": {
+    "other": "Choose the language"
+  },
+  "choose_topic": {
+    "other": "Choose a topic"
+  },
+  "choose_topics": {
+    "other": "Choose topics"
+  },
+  "choose_type": {
+    "other": "Choose a type"
+  },
+  "content": {
+    "other": "Content"
+  },
+  "content_created_at": {
+    "other": "Час публікацыі"
+  },
+  "content_images": {
+    "other": "Images"
+  },
+  "content_meta_form_fields": {
+    "other": "Content Meta"
+  },
+  "content_title": {
+    "other": "Title"
+  },
+  "content_topic": {
+    "other": "Тэма"
+  },
+  "contents": {
+    "other": "Content"
+  },
+  "cover": {
+    "other": "Cover"
+  },
+  "cover_external": {
+    "other": "External Cover"
+  },
+  "cover_internal": {
+    "other": "Internal Cover"
+  },
+  "created_time": {
+    "other": "Created"
+  },
+  "delete": {
+    "other": "Delete"
+  },
+  "do_optimize_upload": {
+    "other": "Optimize"
+  },
+  "edit": {
+    "other": "Edit"
+  },
+  "edit_content": {
+    "other": "Content"
+  },
+  "edit_topic": {
+    "other": "Topic"
+  },
+  "editing": {
+    "other": "Editing"
+  },
+  "email": {
+    "other": "Пошта"
+  },
+  "event_location": {
+    "other": "Event Location"
+  },
+  "event_start_time": {
+    "other": "Event Start Time"
+  },
+  "events": {
+    "other": "Падзеі"
+  },
+  "false": {
+    "other": "No"
+  },
+  "file_credits": {
+    "other": "Credits"
+  },
+  "file_upload": {
+    "other": "File Upload"
+  },
+  "files": {
+    "other": "Files"
+  },
+  "filter_btn": {
+    "other": "Filter"
+  },
+  "filter_by_topic": {
+    "other": "Filter by topic"
+  },
+  "filter_by_topic_all": {
+    "other": "All topics"
+  },
+  "filter_by_type": {
+    "other": "Filter By Type"
+  },
+  "filter_by_type_all": {
+    "other": "All Types"
+  },
+  "first_name": {
+    "other": "Імя"
+  },
+  "found_on_search_query": {
+    "other": "Found for"
+  },
+  "full_name": {
+    "other": "Full Name"
+  },
+  "go_home": {
+    "other": "Home"
+  },
+  "image_caption": {
+    "other": "Caption"
+  },
+  "image_code_sample": {
+    "other": "Image Code Sample"
+  },
+  "image_preview": {
+    "other": "Preview"
+  },
+  "index": {
+    "other": "Index"
+  },
+  "infocenter": {
+    "other": "Infocenter"
+  },
+  "infocenter_tagline": {
+    "other": "public experts answer your questions"
+  },
+  "language": {
+    "other": "Language"
+  },
+  "languages": {
+    "other": "Languages"
+  },
+  "last_name": {
+    "other": "Прозвішча"
+  },
+  "lede": {
+    "other": "Lede"
+  },
+  "link": {
+    "other": "Спасылка"
+  },
+  "login_form": {
+    "other": "Authentication Data"
+  },
+  "login_link": {
+    "other": "Увайсці"
+  },
+  "login_title": {
+    "other": "Аўтарызацыя"
+  },
+  "logout_link": {
+    "other": "Выйсці"
+  },
+  "markdown_markup": {
+    "other": "Markdown markup"
+  },
+  "name": {
+    "other": "Name"
+  },
+  "new_language": {
+    "other": "New Language"
+  },
+  "new_password": {
+    "other": "Новы пароль"
+  },
+  "new_password_confirm": {
+    "other": "Пацвярджэнне пароля"
+  },
+  "new_topic": {
+    "other": "New Topic"
+  },
+  "new_user": {
+    "other": "New User"
+  },
+  "new_user_creation_title": {
+    "other": "Create a new user"
+  },
+  "news_subscription": {
+    "other": "Навіны ў скрынку"
+  },
+  "no_content": {
+    "other": "Няма матэрыялаў"
+  },
+  "no_translation": {
+    "other": "Няма перакладу"
+  },
+  "optimized_uploaded_files": {
+    "other": "Optimized"
+  },
+  "original_image": {
+    "other": "Original"
+  },
+  "page": {
+    "other": "Старонка"
+  },
+  "page_description": {
+    "other": "Page Description (meta-tag)"
+  },
+  "page_meta_form_fields": {
+    "other": "Page Meta"
+  },
+  "page_slug": {
+    "other": "Page Slug (meta-tag)"
+  },
+  "page_title": {
+    "other": "Page Title (meta-tag)"
+  },
+  "parent_content": {
+    "other": "Parent Content"
+  },
+  "password": {
+    "other": "Пароль"
+  },
+  "password_change": {
+    "other": "Змена пароля"
+  },
+  "password_confirm": {
+    "other": "Пацвярджэнне пароля"
+  },
+  "password_restore": {
+    "other": "Аднавіць"
+  },
+  "password_restore_title": {
+    "other": "Скід пароля"
+  },
+  "podcasts": {
+    "other": "Падкасты"
+  },
+  "promoted": {
+    "other": "Promoted"
+  },
+  "public": {
+    "other": "Public"
+  },
+  "published_time": {
+    "other": "Publish Time"
+  },
+  "question": {
+    "other": "Question"
+  },
+  "remove_dependent_content_first": {
+    "other": "Remove dependent content first"
+  },
+  "restore_password": {
+    "other": "Аднавіць"
+  },
+  "save": {
+    "other": "Save"
+  },
+  "scheduled_time": {
+    "other": "Scheduled"
+  },
+  "search": {
+    "other": "Пошук"
+  },
+  "search_btn": {
+    "other": "Знайсці"
+  },
+  "search_placeholder": {
+    "other": "Пошук па матэрыялах сайта"
+  },
+  "send": {
+    "other": "Send"
+  },
+  "signup": {
+    "other": "Рэгістрацыя"
+  },
+  "signup_link": {
+    "other": "Зарэгістраваць"
+  },
+  "slug": {
+    "other": "Slug"
+  },
+  "subscribe_me": {
+    "other": "Падпісацца"
+  },
+  "thank_you_for_your_question": {
+    "other": "Thank you for your question. It's successfully saved and experts will be notified shortly. Answering a question could take time, please, be patient. We will notify you when the answer will be ready."
+  },
+  "title": {
+    "other": "Title"
+  },
+  "topic": {
+    "other": "Тэма"
+  },
+  "topics": {
+    "other": "Тэмы"
+  },
+  "true": {
+    "other": "Yes"
+  },
+  "type": {
+    "other": "Type"
+  },
+  "uploaded_file": {
+    "other": "File"
+  },
+  "uploaded_files": {
+    "other": "Files"
+  },
+  "user_data": {
+    "other": "User's Data"
+  },
+  "user_registration": {
+    "other": "Рэгістрацыя"
+  },
+  "user_roles": {
+    "other": "User Roles"
+  },
+  "users": {
+    "other": "Users"
+  },
+  "weight": {
+    "other": "Weight"
+  }
+}

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="{{ block "langcode" . }}{{ end }}">
+  <head>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+	  {{ block "meta" . }}{{ end }}
+	  <link href="/static/basscss.min.css" rel="stylesheet" />
+	  <link href="/static/all.min.css" rel="stylesheet" />
+  </head>
+  <body class="m0 p0">
+	  <script src="/static/vue.min.js" defer></script>
+	  <div class="flex flex-wrap items-baseline">
+	    <aside class="sm-col-12 md-col-2 flex flex-wrap flex-column mb4">
+        <div class="px3">{{ template "sidebar" . }}</div>
+	    </aside>
+	    <main class="sm-col-12 md-col-10 flex flex-auto flex-column">
+		    <div class="px3 flex flex-wrap flex-column mb4">{{ template "main" . }}</div>
+	    </main>
+	  </div>
+	  {{ block "body-bottom" . }} {{ end }}
+  </body>
+</html>

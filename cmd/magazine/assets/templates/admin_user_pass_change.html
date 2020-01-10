@@ -1,0 +1,21 @@
+{{ define "main" }}
+<h1 class="m0 mb4">{{ T "password_change"}}: <em>{{ .Data.User.FirstName }} {{ .Data.User.LastName }}</em></h1>
+<div class="bg-admin-form p3">
+	<form class="col-12" method="post" action="/{{ langCode .Language }}/admin/users/passchange/{{ idToStr .Data.User.ID }}">
+        <input type="hidden" name="ID" value="{{ idToStr .Data.User.ID }}">
+        <div class="mb2 flex flex-column">
+		    <label>{{ T "password"}} </label>
+	    	<input type="password" name="Password" required>
+	    </div>
+        <div class="mb2 flex flex-column">
+		    <label>{{ T "new_password"}} </label>
+	    	<input type="password" name="NewPassword" required>
+	    </div>
+        <div class="mb2 flex flex-column">
+		    <label>{{ T "new_password_confirm"}} </label>
+	    	<input type="password" name="NewPasswordConfirm" required>
+	    </div>
+	    <button class="btn btn-blue py1 px2 rounded" type="submit">{{ T "save" }}</button>
+	</form>
+</div>
+{{ end }}

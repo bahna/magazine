@@ -1,0 +1,36 @@
+{{ define "main" }}
+<h1 class="m0 mb4">{{ T "new_user_creation_title" }}</h1>
+<div class="bg-admin-form p3">
+	<form class="" method="post" action="/{{ langCode .Language }}/admin/users/">
+	    <div class="mb2 flex flex-column">
+		<label>{{ T "email"}}</label>
+		<input type="email" name="Email" required>
+	    </div>
+	    <div class="mb2 flex flex-column">
+		<label>{{ T "first_name"}} </label>
+		<input type="text" name="FirstName" required>
+	    </div>
+	    <div class="mb2 flex flex-column">
+		<label>{{ T "last_name"}} </label>
+		<input type="text" name="LastName" required>
+	    </div>
+	    <div class="mb2 flex flex-column">
+		<label>{{ T "password"}} </label>
+		<input type="password" name="Password" required>
+	    </div>
+	    <div class="mb2 flex flex-column">
+		<label>{{ T "password_confirm"}} </label>
+		<input type="password" name="PasswordConfirm" required>
+	    </div>
+	    <div class="mb2 flex flex-column">
+		<label>{{ T "user_roles" }}</label>
+		<select name="Roles" multiple>
+		    {{ range $i, $v := .Data.Roles }}
+			<option value="{{ plus $i 1 }}">{{ $v }}</option>
+		    {{ end }}
+		</select>
+	    </div>
+	    <button class="btn btn-blue py1 px2 rounded" type="submit">{{ T "add" }}</button>
+	</form>
+</div>
+{{ end }}

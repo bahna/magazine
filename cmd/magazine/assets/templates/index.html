@@ -1,0 +1,359 @@
+{{ define "meta" }}
+    <title>{{ if .Data.Topic }}{{ .Data.Topic.Title }}{{ else }}{{ T "bahna" }} — {{ T "bahna_tagline" }}{{ end }}</title>
+{{ end }}
+
+{{ define "main" }}
+
+    <div class="py4 px2 smooth-transition flex flex-wrap flex-auto bg-light-grey">
+	<!-- posts -->
+	<main class="col-12 md-col-8 flex flex-wrap mb4">
+	    {{ with .Data.SearchQuery }}
+		<h2 class="col-12 h2 m0 p0 px2 mb3">{{ T "found_on_search_query" }}: <span class="secondary-accent">{{ . }}</span> ({{ len $.Data.MainThread }})</h2>
+	    {{ end }}
+	    
+	    {{ range .Data.MainThread }}
+		{{ if eq .Type 0 }}
+		    {{ template "contentCard" . }}
+		{{ else if eq .Type 1 }}
+		    {{ template "banner" . }}
+		{{ else }}
+		    {{ template "contentCardWithType" . }}
+		{{ end }}
+	    {{ end }}
+
+	    {{ if and (eq (len .Data.MainThread) 0) (eq (len .Data.Series) 0) }}
+		<p class="p0 m0">{{ T "no_content" }}</p>
+	    {{ end }}
+
+	    <footer class="mt1 col-12">
+		{{ if gt $.Data.PrevPageNo 0 }}
+		    <button id="prev_page" class="btn rounded px2 py1" data-href="?p={{ $.Data.PrevPageNo }}">&larr;</button>
+		{{ end }}
+		{{ if gt $.Data.NextPageNo 0 }}
+		    <button id="next_page" class="btn rounded px2 py1" data-href="?p={{ $.Data.NextPageNo }}">&rarr;</button>
+		{{ end }}
+	    </footer>
+	</main>
+
+	<!-- sidebar -->
+	<aside class="col-12 md-col-4">
+	    <div class="px2">
+		<!-- events -->
+		{{ with .Data.Events }}
+		    <section class="mb3">
+			<!-- <h3 class="h3 m0 p0 mb2">{{ T "events" }}</h3> -->
+			{{ range . }}
+			    {{ template "event" . }}      
+			{{ end }}
+		    </section>
+		{{ end }}
+		<!-- search -->
+		<form class="mb3 flex flex-wrap" action="search">
+		    <h3 class="h3 m0 p0 mb1 col-12">{{ T "search" }}</h3>
+		    <div class="mb1 flex flex-auto">
+			<input class="py1 mr1 flex-auto" type="text" name="q" placeholder="{{ T "search_placeholder" }}">
+		    </div>
+		    <div class="mb1 flex">
+			<button type="submit" class="btn rounded px2 py1">{{ T "search_btn" }}</button>
+		    </div>
+		</form>
+		<!-- series -->
+		{{ with .Data.Series }}
+		    <section class="">
+			{{ range . }}
+			    {{ template "seriesCard" . }}
+			{{ end }}
+		    </section>
+		{{ end }}
+		<!-- research -->
+		{{ with .Data.Research }}
+		    <section class="flex items-center justify-center relative">
+			<div class="absolute left-0 forward mb3 col-2 flex justify-start">
+			    <button id="prev_research" class="btn btn-outline rounded px2 py1">&larr;</button>
+			</div>
+			<div class="col-10 siema">
+			    {{ range . }}
+				{{ template "researchCard" . }}
+			    {{ end }}
+			</div>
+			<div class="absolute right-0 forward mb3 col-2 flex justify-end">
+			    <button id="next_research" class="btn btn-outline rounded px2 py1">&rarr;</button>
+			</div>
+		    </section>
+		{{ end }}
+		<!-- podcasts -->
+		{{ with .Data.Audio }}
+		    <section class="">
+			<!--<h3 class="h3 m0 p0 mb2">&#x1f3a7; {{ T "podcasts" }}</h3>-->
+			{{ range . }}
+			    {{ template "podcast" . }}
+			{{ end }}
+		    </section>
+		{{ end }}      
+		<!-- subscription -->
+		<form class="mb3 flex flex-wrap" action="mailchimp">
+		    <h3 class="h3 m0 p0 mb1 col-12">{{ T "news_subscription" }}</h3>
+		    <div class="mb1 flex flex-auto">
+			<input class="py1 mr1 flex-auto" type="text" name="email" placeholder="{{ T "email" }}">
+		    </div>
+		    <div class="mb1 flex">
+			<button type="submit" class="btn rounded px2 py1">{{ T "subscribe_me" }}</button>
+		    </div>
+		</form>
+	    </div>
+	</aside>
+    </div>
+
+    <script src="/static/siema.min.js"></script>
+    <script>
+     // research slider
+     var checkResearch = document.querySelector(".siema");
+     if (checkResearch) {
+	 var siema = new Siema({
+	     selector: ".siema",
+	 });
+     }
+     var prevresearch = document.querySelector("#prev_research");
+     if (prevresearch) {
+	 prevresearch.addEventListener("click", function () { siema.prev(); })
+     }
+     var nextresearch = document.querySelector("#next_research");
+     if (nextresearch) {
+	 nextresearch.addEventListener("click", function () { siema.next(); })
+     }
+
+     // content pages nav
+     var prevpage = document.querySelector("#prev_page");
+     if (prevpage) {
+	 prevpage.addEventListener("click", function (e) { window.location.href = e.target.dataset.href; })
+     }
+     var nextpage = document.querySelector("#next_page");
+     if (nextpage) {
+	 nextpage.addEventListener("click", function (e) { window.location.href = e.target.dataset.href; })
+     }
+    </script>
+{{ end }}
+
+{{ define "clickListener" }}
+    <script>
+     var card = document.querySelector("#card-{{ idToStr .ID }}");
+     card.addEventListener("click", function (event) {
+	 window.location.pathname = "/{{ .Language }}/{{ (index .Topics 0).Slug }}/{{ .Slug }}/";
+     });
+    </script>
+{{ end }}
+
+{{ define "clickListenerBanner" }}
+    <script>
+     var card = document.querySelector("#card-{{ idToStr .ID }}");
+     card.addEventListener("click", function (event) {
+	 window.location = "{{ .LinkTo }}";
+     });
+    </script>
+{{ end }}
+
+{{ define "cardBackgroundImage" }}
+    <style>
+     #card-{{ idToStr .ID }} {
+	 background-image: url("{{ .CoverExternal }}");
+	 background-color: rgb(36, 39, 36);
+	 background-size: cover;
+	 background-position: center center;
+     }
+    </style>
+{{ end }}
+
+{{ define "cardImage" }}
+    <style>
+     #card-image-{{ idToStr .ID }} {
+	 background-image: url("{{ .CoverExternal }}");
+	 background-color: rgb(36, 39, 36);
+	 background-size: cover;
+	 background-position: center center;
+     }
+    </style>
+    <div id="card-image-{{ idToStr .ID }}" class="card-image rounded-top"></div>
+{{ end }}
+
+{{ define "contentCard" }}
+    {{ if and (gt (len .CoverExternal) 0) .Promoted }}
+	{{ template "cardBackgroundImage" . }}
+    {{ end }}
+    <div id="card-wrapper-{{ idToStr .ID }}" class="col-12 {{ if .Promoted }}md-col-12{{ else }}md-col-6{{ end }} flex">
+	<article id="card-{{ idToStr .ID }}" class="card-simple {{ if .Promoted }}promoted{{ end }} rounded mx2 pb2 mb3 flex flex-column flex-auto">
+	    {{ if and (gt (len .CoverExternal) 0) (not .Promoted) }}
+		{{ template "cardImage" . }}
+	    {{ end }}
+	    <h2 class="m0 {{ if .Promoted }}h2{{ else }}h3{{ end }} px3 pt2 flex-auto"><a href="/{{ .Language }}/{{ (index .Topics 0).Slug }}/{{ .Slug }}/" class="neutral-secondary-accent-link {{ if .Promoted }}white text-shadow{{ end }}">{{ .Title }}</a></h2>
+	    <footer class="flex flex-wrap mt2 px3 h6 items-baseline">
+		{{ $item := . }}
+		{{ range .Topics }}
+		    <a class="caps neutral-secondary-accent-link mr2 {{ if $item.Promoted }}white{{ end }}" href="/{{ .Language }}/{{ .Slug }}/">{{ .Title }}</a>
+		{{ end }}
+		<span class="date rounded">{{ pubDate . }}</span>
+	    </footer>
+	</article>
+	{{ template "clickListener" . }}
+    </div>
+{{ end }}
+
+{{ define "event" }}
+    <article id="card-{{ idToStr .ID }}" class="event-card pointer mb3 flex flex-wrap items-start">
+	<div class="col-2 bg-secondary-accent flex flex-column items-center justify-center">
+	    <div class="p2 bold h4 center event-date white">
+		{{ dayNumber .EventStart }}
+		{{ T (monthShort .EventStart) }}
+	    </div>
+	</div>
+	<!--<figure class="col-2 bg-secondary-accent flex items-center justify-center">
+	     <img src="/static/event-icon.svg" alt="{{ .Title }}">
+	     </figure>-->
+	<div class="col-10">
+	    <h2 class="m0 p0 h3 ml2">
+		<a class="neutral-secondary-accent-link" href="/{{ .Language }}/{{ (index .Topics 0).Slug }}/{{ .Slug }}/">{{ .Title }}</a>
+	    </h2>
+	    <footer class="ml2 flex flex-wrap h6 mt1 items-center">
+		<span class="mr2 mb1">&#x2690;&nbsp;{{ .Location }}</span>
+		<span class="mr2 type-label-dark rounded">{{ T (printf "%s" .Type) }}</span>
+		<!--<span class="mr2 mb1">{{ fmtTime .EventStart }}</span>-->
+		{{ $item := . }}
+		<!--{{ range .Topics }}
+		     <a class="caps neutral-secondary-accent-link mr2" href="/{{ .Language }}/{{ .Slug }}/">{{ .Title }}</a>
+		     {{ end }}-->
+	    </footer>
+	</div>
+    </article>
+    {{ template "clickListener" . }}
+{{ end }}
+
+{{ define "podcast" }}
+    <article id="card-{{ idToStr .ID }}" class="audio-card pointer mb3 flex flex-wrap items-start">
+	<figure class="col-2 circle bg-accent flex items-center justify-center">
+	    {{ template "podcastIcon" . }}
+	</figure>
+	<div class="col-10">
+	    <h2 class="m0 p0 ml2 h3">
+		<a class="neutral-secondary-accent-link" href="/{{ .Language }}/{{ (index .Topics 0).Slug }}/{{ .Slug }}/">{{ .Title }}</a>
+	    </h2>
+	    <footer class="ml2 flex flex-wrap h6 mt1 items-center">
+		<span class="mr2 type-label-dark rounded">{{ T (printf "%s" .Type) }}</span>
+		{{ $item := . }}
+		{{ range .Topics }}
+		    <a class="caps neutral-secondary-accent-link mr2" href="/{{ .Language }}/{{ .Slug }}/">{{ .Title }}</a>
+		{{ end }}
+	    </footer>
+	</div>
+    </article>
+    {{ template "clickListener" . }}
+{{ end }}
+
+{{ define "seriesCard" }}
+    {{ if gt (len .CoverExternal) 0 }}
+	{{ template "cardBackgroundImage" . }}
+    {{ end }}
+    <div id="card-wrapper-{{ idToStr .ID }}" class="col-12 flex flex-wrap flex-column mb3 rounded shadow">
+	<article id="card-{{ idToStr .ID }}" class="series-card rounded-top pb2 flex flex-column flex-auto items-center justify-center">
+	    <h2 class="m0 h3 px3 pt2 center"><a href="/{{ .Language }}/{{ (index .Topics 0).Slug }}/{{ .Slug }}/" class="neutral-secondary-accent-link white text-shadow-thin">{{ .Title }}</a></h2>
+	    <footer class="flex flex-wrap mt2 px3 h6 items-baseline">
+		{{ $item := . }}
+		{{ range .Topics }}
+		    <a class="caps neutral-secondary-accent-link mr2 white" href="/{{ .Language }}/{{ .Slug }}/">{{ .Title }}</a>
+		{{ end }}
+		<span class="type-label rounded">{{ T (printf "%s" .Type) }}</span>
+	    </footer>
+	</article>
+	{{ if gt (len .Children) 0 }}
+	    <section class="rounded-bottom flex flex-wrap flex-column bg-white p2 overflow-hidden">
+		{{ range .Children }}
+		    <div class="col-12 overflow-hidden">
+			&#x270f;&nbsp;<a class="neutral-secondary-accent-link" href="/{{ .Language }}/{{ (index .Topics 0).Slug }}/{{ .Slug }}/">{{ cutLine .Title 35 | html }}</a>
+		    </div>
+		{{ end }}
+		<div class="col-12 mt1">
+		    <a class="neutral-secondary-accent-link bold" href="/{{ $item.Language }}/{{ (index $item.Topics 0).Slug }}/{{ $item.Slug }}/">{{ T "and_more" }}</a>
+		</div>
+	    </section>
+	{{ end }}
+	{{ template "clickListener" . }}
+    </div>
+{{ end }}
+
+{{ define "researchCard" }}
+    <div id="card-wrapper-{{ idToStr .ID }}" class="col-12 flex flex-wrap flex-column mb3 ">
+	<article id="card-{{ idToStr .ID }}" class="research-card rounded mx1 self-center shadow pb2 flex flex-column flex-auto items-center justify-center">
+	    <h2 class="m0 h3 px3 pt2 center"><a href="/{{ .Language }}/{{ (index .Topics 0).Slug }}/{{ .Slug }}/" class="neutral-secondary-accent-link white text-shadow-thin">{{ .Title }}</a></h2>
+	    <footer class="flex flex-wrap mt2 px3 h6 items-baseline justify-center">
+		<span class="type-label rounded mb1">{{ T (printf "%s" .Type) }}</span>
+		{{ $item := . }}
+		{{ range .Topics }}
+		    <a class="caps neutral-secondary-accent-link mx1 white" href="/{{ .Language }}/{{ .Slug }}/">{{ .Title }}</a>
+		{{ end }}
+	    </footer>
+	</article>
+	{{ template "clickListener" . }}
+    </div>
+{{ end }}
+
+{{ define "contentCardWithType" }}
+    {{ if and (gt (len .CoverExternal) 0) .Promoted }}
+	{{ template "cardBackgroundImage" . }}
+    {{ end }}
+    <div id="card-wrapper-{{ idToStr .ID }}" class="col-12 {{ if .Promoted }}md-col-12{{ else }}md-col-6{{ end }} flex">
+	<article id="card-{{ idToStr .ID }}" class="card-simple {{ if .Promoted }}promoted{{ end }} rounded mx2 pb2 mb3 flex flex-column flex-auto">
+	    {{ if and (gt (len .CoverExternal) 0) (not .Promoted) }}
+		{{ template "cardImage" . }}
+	    {{ end }}
+	    <h2 class="m0 {{ if .Promoted }}h2{{ else }}h3{{ end }} px3 pt2 flex-auto"><a href="/{{ .Language }}/{{ (index .Topics 0).Slug }}/{{ .Slug }}/" class="neutral-secondary-accent-link {{ if .Promoted }}white text-shadow{{ end }}">{{ .Title }}</a></h2>
+	    <footer class="flex flex-wrap mt2 px3 h6 items-baseline">
+		{{ $item := . }}
+		{{ range .Topics }}
+		    <a class="caps neutral-secondary-accent-link mr2 {{ if $item.Promoted }}white{{ end }}" href="/{{ .Language }}/{{ .Slug }}/">{{ .Title }}</a>
+		{{ end }}
+		<span class="date rounded mr2">{{ pubDate . }}</span>
+		<span class="{{ if gt (len .CoverExternal) 0 }}type-label{{ else }}type-label-dark{{ end }} rounded">{{ T (printf "%s" .Type) }}</span>
+	    </footer>
+	</article>
+	{{ template "clickListener" . }}
+    </div>
+{{ end }}
+
+{{ define "banner" }}
+    {{ template "cardBackgroundImage" . }}
+    <div id="card-wrapper-{{ idToStr .ID }}" class="col-12 {{ if .Promoted }}md-col-12{{ else }}md-col-6{{ end }} flex">
+	<article id="card-{{ idToStr .ID }}" class="banner {{ if .Promoted }}promoted{{ end }} mx2 pb2 mb3 flex flex-column flex-auto justify-center items-center">
+	    <h2 class="m0 mt3 h3 px2 p1 rounded center col-12 {{ if .Promoted }}md-col-7{{ else }}md-col-10{{ end }}">
+		<a href="{{ .LinkTo }}" class="white">{{ .Title }}</a>
+	    </h2>
+	    <footer class="flex flex-wrap mt2 px3 h6 items-baseline">
+		<span class="type-label rounded">{{ T (printf "%s" .Type) }}</span>
+	    </footer>
+	</article>
+	{{ template "clickListenerBanner" . }}
+    </div>
+{{ end }}
+
+{{ define "podcastIcon" }}
+    <svg class="p2" width="24px" height="45px" viewBox="0 0 24 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs></defs>
+	<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+	    <g id="Group-2">
+		<polygon id="Path-2" fill="#FFFFFF" points="0.476806641 38.0534668 10.7282715 13.7353516 13.3115234 13.7695312 23.3762207 37.8845215 12.2770996 43.9716797"></polygon>
+		<g id="pocast-icon" fill-rule="nonzero">
+		    <path d="M2.95813953,15.2777778 C2.73488372,15.2777778 2.56744186,15.1666667 2.45581395,15 C1.61860465,13.5 1.22790698,11.7777778 1.22790698,9.94444444 C1.22790698,6.16666667 3.06976744,2.66666667 6.13953488,0.666666667 C6.41860465,0.5 6.75348837,0.555555556 6.92093023,0.833333333 C7.08837209,1.11111111 7.03255814,1.44444444 6.75348837,1.61111111 C3.9627907,3.44444444 2.28837209,6.55555556 2.28837209,10 C2.28837209,11.6111111 2.67906977,13.1666667 3.40465116,14.5 C3.57209302,14.7777778 3.46046512,15.1111111 3.18139535,15.2777778 L2.95813953,15.2777778 Z M5.69302326,13.6666667 C5.46976744,13.6666667 5.30232558,13.5555556 5.19069767,13.3333333 C4.63255814,12.2222222 4.35348837,11 4.35348837,9.77777778 C4.35348837,7.05555556 5.6372093,4.61111111 7.9255814,3.16666667 C8.20465116,3 8.53953488,3.05555556 8.70697674,3.33333333 C8.8744186,3.61111111 8.81860465,3.94444444 8.53953488,4.11111111 C6.58604651,5.38888889 5.46976744,7.44444444 5.46976744,9.83333333 C5.46976744,10.8888889 5.74883721,12 6.19534884,12.9444444 C6.30697674,13.2222222 6.19534884,13.5555556 5.97209302,13.6666667 C5.86046512,13.6666667 5.80465116,13.6666667 5.69302326,13.6666667 Z" id="Shape" fill="#000000"></path>
+		    <path d="M21.0418605,15.2777778 C20.9302326,15.2777778 20.8744186,15.2777778 20.8186047,15.2222222 C20.5395349,15.1111111 20.427907,14.7777778 20.5953488,14.5 C21.3209302,13.0555556 21.7116279,11.5 21.7116279,9.94444444 C21.7116279,6.61111111 20.0372093,3.5 17.2465116,1.55555556 C16.9674419,1.38888889 16.9116279,1.05555556 17.0790698,0.777777778 C17.2465116,0.5 17.5813953,0.444444444 17.8604651,0.611111111 C20.9302326,2.72222222 22.772093,6.22222222 22.772093,9.88888889 C22.772093,11.5555556 22.3255814,13.3333333 21.544186,14.8888889 C21.4325581,15.1666667 21.2651163,15.2777778 21.0418605,15.2777778 Z M18.2511628,13.6666667 C18.1395349,13.6666667 18.0837209,13.6666667 18.027907,13.6111111 C17.7488372,13.5 17.6372093,13.1666667 17.8046512,12.8888889 C18.2511628,11.9444444 18.5302326,10.8888889 18.5302326,9.77777778 C18.5302326,7.5 17.4139535,5.33333333 15.4604651,4.05555556 C15.1813953,3.88888889 15.1255814,3.55555556 15.2930233,3.27777778 C15.4604651,3 15.7953488,2.94444444 16.0744186,3.11111111 C18.3069767,4.61111111 19.5906977,7.05555556 19.5906977,9.72222222 C19.5906977,10.9444444 19.3116279,12.2222222 18.7534884,13.2777778 C18.6418605,13.5555556 18.4744186,13.6666667 18.2511628,13.6666667 Z" id="Shape" fill="#000000"></path>
+		    <path d="M12,44.7777778 C11.8883721,44.7777778 11.8325581,44.7777778 11.7209302,44.7222222 L0.334883721,38.5555556 C0.0558139535,38.4444444 -6.71546152e-14,38.1111111 0.111627907,37.8333333 L10.9395349,12 C11.0511628,11.7222222 11.3860465,11.5555556 11.6651163,11.7222222 C11.944186,11.8333333 12.1116279,12.1666667 11.944186,12.4444444 L1.33953488,37.8333333 L12.2790698,43.7222222 C12.5581395,43.8888889 12.6697674,44.2222222 12.5023256,44.5 C12.3906977,44.6666667 12.2232558,44.7777778 12,44.7777778 Z" id="Shape" fill="#000000"></path>
+		    <path d="M12,33.3333333 C11.8883721,33.3333333 11.8325581,33.3333333 11.7209302,33.2777778 L4.24186047,29.2222222 C3.9627907,29.0555556 3.85116279,28.7222222 4.01860465,28.4444444 C4.18604651,28.1666667 4.52093023,28.0555556 4.8,28.2222222 L12.2790698,32.2777778 C12.5581395,32.4444444 12.6697674,32.7777778 12.5023256,33.0555556 C12.3906977,33.2222222 12.2232558,33.3333333 12,33.3333333 Z" id="Shape" fill="#000000"></path>
+		    <path d="M12,21.8888889 C11.8883721,21.8888889 11.8325581,21.8888889 11.7209302,21.8333333 L8.14883721,19.8888889 C7.86976744,19.7222222 7.75813953,19.3888889 7.9255814,19.1111111 C8.09302326,18.8333333 8.42790698,18.7222222 8.70697674,18.8888889 L12.2790698,20.8333333 C12.5581395,21 12.6697674,21.3333333 12.5023256,21.6111111 C12.3906977,21.7777778 12.2232558,21.8888889 12,21.8888889 Z" id="Shape" fill="#000000"></path>
+		    <path d="M12,44.7777778 C11.7767442,44.7777778 11.6093023,44.6666667 11.4976744,44.5 C11.3302326,44.2222222 11.4418605,43.8888889 11.7209302,43.7222222 L22.6046512,37.7777778 L12,12.4444444 C11.8883721,12.1666667 12,11.8333333 12.2790698,11.7222222 C12.5581395,11.6111111 12.8930233,11.7222222 13.0046512,12 L23.8325581,37.8333333 C23.944186,38.1111111 23.8325581,38.3888889 23.6093023,38.5555556 L12.2790698,44.7222222 C12.1674419,44.7777778 12.1116279,44.7777778 12,44.7777778 Z" id="Shape" fill="#000000"></path>
+		    <path d="M12,33.3333333 C11.7767442,33.3333333 11.6093023,33.2222222 11.4976744,33.0555556 C11.3302326,32.7777778 11.4418605,32.4444444 11.7209302,32.2777778 L19.144186,28.2222222 C19.4232558,28.0555556 19.7581395,28.1666667 19.9255814,28.4444444 C20.0930233,28.7222222 19.9813953,29.0555556 19.7023256,29.2222222 L12.2790698,33.2777778 C12.1674419,33.3333333 12.1116279,33.3333333 12,33.3333333 Z" id="Shape" fill="#000000"></path>
+		    <path d="M12,21.8888889 C11.7767442,21.8888889 11.6093023,21.7777778 11.4976744,21.6111111 C11.3302326,21.3333333 11.4418605,21 11.7209302,20.8333333 L15.2372093,18.8888889 C15.5162791,18.7222222 15.8511628,18.8333333 16.0186047,19.1111111 C16.1860465,19.3888889 16.0744186,19.7222222 15.7953488,19.8888889 L12.2790698,21.8333333 C12.1674419,21.8888889 12.1116279,21.8888889 12,21.8888889 Z" id="Shape" fill="#000000"></path>
+		    <path d="M12,44.7777778 C11.6651163,44.7777778 11.4418605,44.5555556 11.4418605,44.2222222 L11.4418605,12.2222222 C11.4418605,11.8888889 11.6651163,11.6666667 12,11.6666667 C12.3348837,11.6666667 12.5581395,11.8888889 12.5581395,12.2222222 L12.5581395,44.2222222 C12.5581395,44.5555556 12.3348837,44.7777778 12,44.7777778 Z" id="Shape" fill="#000000"></path>
+		    <g id="Group" transform="translate(7.813953, 5.555556)">
+			<ellipse id="Oval" fill="#FFFFFF" cx="4.18604651" cy="4.5" rx="3.62790698" ry="3.61111111"></ellipse>
+			<path d="M4.18604651,8.66666667 C1.89767442,8.66666667 0,6.77777778 0,4.5 C0,2.22222222 1.89767442,0.333333333 4.18604651,0.333333333 C6.4744186,0.333333333 8.37209302,2.22222222 8.37209302,4.5 C8.37209302,6.77777778 6.4744186,8.66666667 4.18604651,8.66666667 Z M4.18604651,1.44444444 C2.51162791,1.44444444 1.11627907,2.83333333 1.11627907,4.5 C1.11627907,6.16666667 2.51162791,7.55555556 4.18604651,7.55555556 C5.86046512,7.55555556 7.25581395,6.16666667 7.25581395,4.5 C7.25581395,2.83333333 5.86046512,1.44444444 4.18604651,1.44444444 Z" id="Shape" fill="#000000"></path>
+		    </g>
+		</g>
+	    </g>
+	</g>
+    </svg>
+{{ end }}

@@ -1,0 +1,11 @@
+{{ define "main" }}
+<section>
+    {{ if gt (len .Data.Content) 0 }}
+	{{ range .Data.Content }}
+	    <div><a href="/{{ langCode $.Language }}/{{ .Topic.Slug }}/{{ .Content.Slug }}/">{{ .Content.Title }}</a></div>
+	{{ end }}
+    {{ else }}
+	<em>{{ T "no_content" }}</em>
+    {{ end }}
+</section>
+{{ end }}

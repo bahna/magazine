@@ -1,0 +1,28 @@
+{{ define "main" }}
+<h1 class="m0 mb4">{{ T "editing"}}: <em>{{ .Data.CurrentFile.Title }}</em></h1>
+
+<form method="post">
+  <div class="bg-admin-form p3 flex flex-wrap">
+    {{ if eq .Data.CurrentFile.Kind 1 }}
+      <div class="col-12">
+        {{ if gt (len .Data.CurrentFile.Optimized) 0 }}
+          <a href="{{ (index .Data.CurrentFile.Optimized 0).URL }}"><img class="mb2 sm-col-12 md-col-6" alt="{{ .Data.CurrentFile.Title }}" src="{{ (index .Data.CurrentFile.Optimized 0).URL }}"></a>
+        {{ else }}
+          <a href="{{ .Data.CurrentFile.URL }}"><img class="mb2" alt="{{ .Data.CurrentFile.Title }}" src="{{ .Data.CurrentFile.URL }}"></a>
+        {{ end }}
+      </div>
+    {{ end }}
+  
+    <div class="mb2 col-12 flex flex-column">
+  	  <label id="Title" for="Title">{{ T "title"}} </label>
+  	  <input name="Title" type="text" value="{{ .Data.CurrentFile.Title }}"/>
+    </div>
+    <div class="mb2 col-12 flex flex-column">
+  	  <label id="Title" for="Title">{{ T "file_credits"}} </label>
+  	  <input name="Credits" type="text" value="{{ .Data.CurrentFile.Credits }}"/>
+    </div>
+    <button class="btn btn-blue py1 px2 rounded" type="submit">{{ T "save" }}</button>
+  </div>
+</form>
+
+{{ end }}
