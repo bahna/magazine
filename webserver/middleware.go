@@ -1,5 +1,4 @@
-// Package middleware provides handler wrappers for different general purposes.
-package middleware
+package main
 
 import (
 	"context"
@@ -7,12 +6,11 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"runtime/debug"
+	debugPkg "runtime/debug"
 	"strings"
 	"time"
 
-	"github.com/bahna/magazine/appkit"
-	"github.com/bahna/magazine/mail"
+	"github.com/bahna/magazine/webserver/mail"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/securecookie"
 	mgo "gopkg.in/mgo.v2"
@@ -37,10 +35,10 @@ func init() {
 }
 
 // AuthorizeAdminsMiddleware uses global variables adminGroup and app to authorize users.
-func AuthorizeAdminsMiddleware(app *appkit.Application) mux.MiddlewareFunc {
+func AuthorizeAdminsMiddleware(app *application) mux.MiddlewareFunc {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			if u, _ := appkit.LoginUser(app, r); u != nil {
+			if u, _ := LoginUser(app, r); u != nil {
 				for _, v := range u.Roles {
 					for _, rl := range app.Config.AdminGroup {
 						if v == rl { // at least one role is satisfied
@@ -55,10 +53,10 @@ func AuthorizeAdminsMiddleware(app *appkit.Application) mux.MiddlewareFunc {
 	}
 }
 
-func CurrentUserMiddleware(app *appkit.Application) mux.MiddlewareFunc {
+func CurrentUserMiddleware(app *application) mux.MiddlewareFunc {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			u, err := appkit.LoginUser(app, r)
+			u, err := LoginUser(app, r)
 			if err != nil {
 				log.Println(err)
 			} else {
@@ -91,7 +89,7 @@ func Recover(next http.Handler) http.Handler {
 				if code > 404 {
 					// log
 					log.Println(e)
-					log.Printf("%s\n", debug.Stack())
+					log.Printf("%s\n", debugPkg.Stack())
 					// send error message
 					subj := mailErrSubj + e.Error()
 					if err := mail.SendErrorInsecure(mailcfg, e, r, http.StatusInternalServerError, mailErrFrom, subj, mailErrTo); err != nil {

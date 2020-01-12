@@ -14,8 +14,8 @@ import (
 	"strings"
 	"time"
 
-	"bitbucket.org/iharsuvorau/mongo"
-	"github.com/bahna/magazine/cms"
+	"github.com/bahna/magazine/webserver/cms"
+	"github.com/bahna/magazine/webserver/mongo"
 
 	// NOTE: there is a strange behaviour while trying to "go generate" when this file is present
 	// because of an import of "bitbucket.org/iharsuvorau/wander" which in imports

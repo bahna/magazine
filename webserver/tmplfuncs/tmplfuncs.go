@@ -8,10 +8,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/bahna/magazine/appkit"
-	"github.com/bahna/magazine/cms"
-	"github.com/bahna/magazine/cms/file"
-	"github.com/bahna/magazine/cms/user"
+	"github.com/Machiel/slugify"
+	"github.com/bahna/magazine/webserver/cms"
+	"github.com/bahna/magazine/webserver/cms/file"
+	"github.com/bahna/magazine/webserver/cms/user"
 	"golang.org/x/text/language"
 	"golang.org/x/text/language/display"
 	"gopkg.in/mgo.v2/bson"
@@ -103,9 +103,9 @@ func PubDate(c *cms.Content) string {
 	return c.Published.Format(layout)
 }
 
-func Translit(app *appkit.Application) func(s string) string {
+func Translit(slug *slugify.Slugifier) func(s string) string {
 	return func(s string) string {
-		return app.Transliterator.Slugify(s)
+		return slug.Slugify(s)
 	}
 }
 

@@ -5,13 +5,12 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/bahna/magazine/appkit"
-	"github.com/bahna/magazine/appkit/tmplfuncs"
-	"github.com/bahna/magazine/cms"
+	"github.com/bahna/magazine/webserver/cms"
+	"github.com/bahna/magazine/webserver/tmplfuncs"
 	"github.com/nicksnyder/go-i18n/i18n"
 )
 
-func generateTmplFuncs(app *appkit.Application) template.FuncMap {
+func generateTmplFuncs(app *application) template.FuncMap {
 	m := map[string]interface{}{
 		"T":            i18n.IdentityTfunc,
 		"langName":     tmplfuncs.LangTagName,
@@ -28,7 +27,7 @@ func generateTmplFuncs(app *appkit.Application) template.FuncMap {
 		"inputTimeNow": tmplfuncs.InputTimeNow,
 		"hasID":        tmplfuncs.HasID,
 		"md":           tmplfuncs.Markdown,
-		"translit":     tmplfuncs.Translit(app),
+		"translit":     tmplfuncs.Translit(app.Transliterator),
 		"joinUsers":    tmplfuncs.JoinUsers,
 		"joinTopics":   tmplfuncs.JoinTopics,
 		"srcset":       tmplfuncs.Srcset,

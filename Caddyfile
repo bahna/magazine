@@ -1,0 +1,32 @@
+:8080 {
+        timeouts 10m
+        gzip
+        proxy / localhost:9020 {
+                header_upstream Host {host}
+                header_upstream X-Real-IP {remote}
+                header_upstream X-Forwarded-For {remote}
+                header_upstream X-Forwarded-Proto {scheme}
+        }
+        #basicauth / bahna-friend let-me-see
+        log / /deploy/log/magazine-access.log "{combined}" {
+                rotate {
+                        size 50 # Rotate after 50 MB
+                        age  30  # Keep log files for 30 days
+                        keep 20  # Keep at most 20 log files
+                }
+        }
+        errors {
+                log /deploy/log/magazine-error.log {
+                        size 50 # Rotate after 50 MB
+                        age  30 # Keep rotated files for 30 days
+                        keep 20  # Keep at most 20 log files
+                }
+        }
+        expires {
+                match .css$ 7d
+                match .js$ 7d
+                match .jpg$ 1m
+                match .jpeg$ 1m
+                match .svg$ 1m
+        }
+}

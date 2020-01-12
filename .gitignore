@@ -1,14 +1,14 @@
-.DS_Store
+*~
 *.log
 *.otf
 *.ttf
-*~
+*.deb
+secret.bash
+.DS_Store
+*.org
 
 build/
 vendor/
 node_modules/
 mongodump/
-
-secret.sh
-cmd/magazine/assets/files/
-
+assets/files/

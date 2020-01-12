@@ -5,7 +5,7 @@ package main
 import (
 	"time"
 
-	"github.com/bahna/magazine/cms"
+	"github.com/bahna/magazine/webserver/cms"
 	"golang.org/x/text/language"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"

@@ -4,13 +4,10 @@ import (
 	"net/http"
 	"path"
 
-	"github.com/bahna/magazine/appkit"
-	"github.com/bahna/magazine/appkit/handlers"
-	"github.com/bahna/magazine/appkit/middleware"
 	"github.com/gorilla/mux"
 )
 
-func makeRouter(a *appkit.Application) *mux.Router {
+func makeRouter(a *application) *mux.Router {
 	r := mux.NewRouter()
 	r.StrictSlash(true)
 
@@ -19,8 +16,8 @@ func makeRouter(a *appkit.Application) *mux.Router {
 
 	// admin handlers
 	admin := withLang.PathPrefix("/admin").Subrouter()
-	admin.Use(middleware.AuthorizeAdminsMiddleware(a))
-	admin.Use(middleware.CurrentUserMiddleware(a))
+	admin.Use(AuthorizeAdminsMiddleware(a))
+	admin.Use(CurrentUserMiddleware(a))
 	admin.Handle("/{colname}/delete/{id}", adminDeleteHandler(a)).Methods("GET") // general delete
 	admin.Handle("/topics/edit/{id}", adminEditTopicHandler(a)).Methods("GET")
 	admin.Handle("/topics/new", adminNewTopicHandler(a)).Methods("GET")
@@ -55,15 +52,15 @@ func makeRouter(a *appkit.Application) *mux.Router {
 	withLang.Handle("/", indexHandler(a)).Name("index")
 
 	// static files
-	r.Handle("/static/{key:.*}", handlers.StaticFolder(a.Config.StaticDir, a.Config.MaxAge)).Methods("GET")
-	r.Handle("/files/{key:.*}", handlers.StaticFolderDebug(
+	r.Handle("/static/{key:.*}", StaticFolder(a.Config.StaticDir, a.Config.MaxAge)).Methods("GET")
+	r.Handle("/files/{key:.*}", StaticFolderDebug(
 		a.Config.FilesDir, a.Config.MaxAge, debug, "https://bahna.land/files/")).Methods("GET")
-	r.Handle("/sitemap.xml", handlers.ServeFile(path.Join(a.Config.StaticDir, "sitemap.xml"), "application/xml"))
+	r.Handle("/sitemap.xml", ServeFile(path.Join(a.Config.StaticDir, "sitemap.xml"), "application/xml"))
 	r.HandleFunc("/robots.txt", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte(robotsTxt))
 	})
 	for name, contentType := range favicons {
-		r.Handle("/"+name, handlers.ServeFile(path.Join(a.Config.StaticDir, name), contentType))
+		r.Handle("/"+name, ServeFile(path.Join(a.Config.StaticDir, name), contentType))
 	}
 
 	// index catchall handler

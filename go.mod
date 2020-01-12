@@ -3,8 +3,6 @@ module github.com/bahna/magazine
 go 1.13
 
 require (
-	bitbucket.org/iharsuvorau/mongo v0.0.0-20181211195505-afe6d80959c2
-	bitbucket.org/iharsuvorau/slugifier v1.0.0
 	bitbucket.org/iharsuvorau/wander v1.0.0
 	github.com/Machiel/slugify v1.0.1
 	github.com/davidbyttow/govips v0.0.0-20190304175058-d272f04c0fea // indirect
@@ -23,10 +21,6 @@ require (
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 	gopkg.in/yaml.v2 v2.2.7 // indirect
 )
-
-replace bitbucket.org/iharsuvorau/mongo => /Users/ihar/go/src/bitbucket.org/iharsuvorau/mongo
-
-replace bitbucket.org/iharsuvorau/slugifier => /Users/ihar/go/src/bitbucket.org/iharsuvorau/slugifier
 
 replace bitbucket.org/iharsuvorau/wander => /Users/ihar/go/src/bitbucket.org/iharsuvorau/wander
 

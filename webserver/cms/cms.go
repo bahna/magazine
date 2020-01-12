@@ -6,7 +6,7 @@ import (
 	"net/mail"
 	"time"
 
-	"github.com/bahna/magazine/cms/user"
+	"github.com/bahna/magazine/webserver/cms/user"
 	"gopkg.in/mgo.v2/bson"
 )
 

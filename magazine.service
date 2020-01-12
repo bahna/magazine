@@ -1,0 +1,9 @@
+[Unit]
+Description=Bahna Magazine
+
+[Service]
+ExecStart=/deploy/bin/magazine-server -addr :9020 -dbhost 127.0.0.1 -dbname magazine -log /deploy/log/magazine -gassets /deploy/cms_assets
+WorkingDirectory=/deploy/magazine
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+# do not forget to put env variables in the production
