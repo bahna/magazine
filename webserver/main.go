@@ -17,9 +17,9 @@ import (
 	"time"
 
 	"github.com/Machiel/slugify"
-	"github.com/bahna/magazine/webserver/cms/user"
 	"github.com/bahna/magazine/webserver/mongo"
 	"github.com/bahna/magazine/webserver/slugifier"
+	"github.com/bahna/magazine/webserver/user"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/schema"
 	"github.com/gorilla/securecookie"

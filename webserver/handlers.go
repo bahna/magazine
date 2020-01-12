@@ -13,10 +13,10 @@ import (
 	"time"
 
 	"github.com/bahna/magazine/webserver/cms"
-	"github.com/bahna/magazine/webserver/cms/file"
-	"github.com/bahna/magazine/webserver/cms/user"
+	"github.com/bahna/magazine/webserver/file"
 	"github.com/bahna/magazine/webserver/mail"
 	"github.com/bahna/magazine/webserver/mongo"
+	"github.com/bahna/magazine/webserver/user"
 	"github.com/gorilla/mux"
 	"golang.org/x/text/language"
 	"gopkg.in/mgo.v2/bson"

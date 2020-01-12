@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/bahna/magazine/webserver/cms/user"
 	"github.com/bahna/magazine/webserver/mongo"
+	"github.com/bahna/magazine/webserver/user"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )

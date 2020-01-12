@@ -1,4 +1,4 @@
-package tmplfuncs
+package main
 
 import (
 	"bytes"
