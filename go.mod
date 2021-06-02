@@ -24,4 +24,4 @@ require (
 
 replace bitbucket.org/iharsuvorau/wander => /Users/ihar/go/src/bitbucket.org/iharsuvorau/wander
 
-replace github.com/bahna/magazine => /Users/ihar/projects/bahna/devel/src/magazine
+replace github.com/bahna/magazine => "/Users/ihar/projects/bahna/bahna cms/devel/magazine"

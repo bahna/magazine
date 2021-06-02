@@ -2,11 +2,9 @@ github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/Machiel/slugify v1.0.1 h1:EfWSlRWstMadsgzmiV7d0yVd2IFlagWH68Q+DcYCm4E=
 github.com/Machiel/slugify v1.0.1/go.mod h1:fTFGn5uWEynW4CUMG7sWkYXOf1UgDxyTM3DbR6Qfg3k=
-github.com/davecgh/go-spew v1.1.0 h1:ZDRjVQ15GmhC3fiQ8ni8+OwkZQO4DARzQgrnXU1Liz8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/davidbyttow/govips v0.0.0-20180605232952-e66f7631e0f6 h1:ciJpWRehgoffTPJv/CU63ZbC8KY7q8l/NofJKG6MoKs=
 github.com/davidbyttow/govips v0.0.0-20180605232952-e66f7631e0f6/go.mod h1:a3qO525EPfJNYa0NXBcNtXzJvyQsJAxphEDa7OOHPBk=
 github.com/davidbyttow/govips v0.0.0-20190304175058-d272f04c0fea h1:ZtETbJTO1R3qVLdVbpjrDhD5fR8bYVhhq2RMi7rOlH4=
 github.com/davidbyttow/govips v0.0.0-20190304175058-d272f04c0fea/go.mod h1:a3qO525EPfJNYa0NXBcNtXzJvyQsJAxphEDa7OOHPBk=

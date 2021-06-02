@@ -58,9 +58,9 @@ func main() {
 	debug = *debugflag
 
 	// loading UI translations during the package initialization
-	i18n.MustLoadTranslationFile(path.Join(*globalAssets, "i18n/en-us.all.json"))
-	i18n.MustLoadTranslationFile(path.Join(*globalAssets, "i18n/ru.all.json"))
-	i18n.MustLoadTranslationFile(path.Join(*globalAssets, "i18n/be.all.json"))
+	i18n.MustLoadTranslationFile(path.Join(*globalAssets, "en-us.all.json"))
+	i18n.MustLoadTranslationFile(path.Join(*globalAssets, "ru.all.json"))
+	i18n.MustLoadTranslationFile(path.Join(*globalAssets, "be.all.json"))
 
 	// read environment variables
 	hashKey := MustGetEnv(hashKeyEnv)
@@ -179,10 +179,6 @@ func newApplication(cfg *configuration) (app *application, err error) {
 		return app, fmt.Errorf("failed to create database indexes: %v", err)
 	}
 
-	funcs := generateTmplFuncs(app)
-
-	tmpls := generateTmpls(cfg.TmplDir, funcs)
-
 	langs := []language.Tag{
 		language.English, // first language is used as a fallback
 		language.MustParse("be"),
@@ -192,14 +188,18 @@ func newApplication(cfg *configuration) (app *application, err error) {
 	app = &application{
 		Config:         cfg,
 		Db:             s.DB(cfg.DbName),
-		Funcs:          funcs,
-		Templates:      tmpls,
 		Langs:          langs,
 		LangMatcher:    language.NewMatcher(langs),
 		LangNamer:      display.English.Languages(),
 		FormDecoder:    schema.NewDecoder(),
 		Transliterator: slugifier.NewSlugifier(),
 	}
+
+	funcs := generateTmplFuncs(app)
+	tmpls := generateTmpls(cfg.TmplDir, funcs)
+
+	app.Funcs = funcs
+	app.Templates = tmpls
 
 	app.Router = makeRouter(app)
 
