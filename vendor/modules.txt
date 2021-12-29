@@ -1,0 +1,40 @@
+# bitbucket.org/iharsuvorau/wander v1.0.0 => /Users/ihar/go/src/bitbucket.org/iharsuvorau/wander
+bitbucket.org/iharsuvorau/wander
+# github.com/Machiel/slugify v1.0.1
+github.com/Machiel/slugify
+# github.com/davidbyttow/govips v0.0.0-20190304175058-d272f04c0fea
+github.com/davidbyttow/govips/pkg/vips
+# github.com/gorilla/mux v1.7.3
+github.com/gorilla/mux
+# github.com/gorilla/schema v1.1.0
+github.com/gorilla/schema
+# github.com/gorilla/securecookie v1.1.1
+github.com/gorilla/securecookie
+# github.com/nicksnyder/go-i18n v1.10.0
+github.com/nicksnyder/go-i18n/i18n
+github.com/nicksnyder/go-i18n/i18n/bundle
+github.com/nicksnyder/go-i18n/i18n/language
+github.com/nicksnyder/go-i18n/i18n/translation
+# github.com/pelletier/go-toml v1.6.0
+github.com/pelletier/go-toml
+# github.com/russross/blackfriday v1.5.2
+github.com/russross/blackfriday
+# golang.org/x/text v0.3.2
+golang.org/x/text/internal/format
+golang.org/x/text/internal/language
+golang.org/x/text/internal/language/compact
+golang.org/x/text/internal/tag
+golang.org/x/text/language
+golang.org/x/text/language/display
+# gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc
+gopkg.in/alexcesaro/quotedprintable.v3
+# gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
+gopkg.in/gomail.v2
+# gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
+gopkg.in/mgo.v2
+gopkg.in/mgo.v2/bson
+gopkg.in/mgo.v2/internal/json
+gopkg.in/mgo.v2/internal/sasl
+gopkg.in/mgo.v2/internal/scram
+# gopkg.in/yaml.v2 v2.2.7
+gopkg.in/yaml.v2

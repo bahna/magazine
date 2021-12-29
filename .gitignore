@@ -8,7 +8,6 @@ secret.bash
 *.org
 
 build/
-vendor/
 node_modules/
 mongodump/
 assets/files/
