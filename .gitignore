@@ -12,3 +12,4 @@ vendor/
 node_modules/
 mongodump/
 assets/files/
+.idea/
