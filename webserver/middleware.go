@@ -13,7 +13,7 @@ import (
 	"github.com/bahna/magazine/webserver/mail"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/securecookie"
-	mgo "gopkg.in/mgo.v2"
+	"github.com/globalsign/mgo"
 )
 
 // TODO: fast solution, replace the code below with something more configurable

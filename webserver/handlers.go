@@ -17,9 +17,9 @@ import (
 	"github.com/bahna/magazine/webserver/mail"
 	"github.com/bahna/magazine/webserver/mongo"
 	"github.com/bahna/magazine/webserver/user"
+	"github.com/globalsign/mgo/bson"
 	"github.com/gorilla/mux"
 	"golang.org/x/text/language"
-	"gopkg.in/mgo.v2/bson"
 )
 
 // topicWithAmount is a wrapper struct to extend cms.Topic type with

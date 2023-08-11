@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/bahna/magazine/webserver/user"
-	"gopkg.in/mgo.v2/bson"
+	"github.com/globalsign/mgo/bson"
 )
 
 // Content represents a piece of content which belongs to one or several topics

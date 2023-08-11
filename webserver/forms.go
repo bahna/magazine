@@ -5,7 +5,7 @@ import (
 
 	"github.com/bahna/magazine/webserver/cms"
 	"github.com/bahna/magazine/webserver/user"
-	"gopkg.in/mgo.v2/bson"
+	"github.com/globalsign/mgo/bson"
 )
 
 type userForm struct {

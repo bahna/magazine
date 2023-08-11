@@ -20,13 +20,13 @@ import (
 	"github.com/bahna/magazine/webserver/mongo"
 	"github.com/bahna/magazine/webserver/slugifier"
 	"github.com/bahna/magazine/webserver/user"
+	"github.com/globalsign/mgo"
 	"github.com/gorilla/mux"
 	"github.com/gorilla/schema"
 	"github.com/gorilla/securecookie"
 	"github.com/nicksnyder/go-i18n/i18n"
 	"golang.org/x/text/language"
 	"golang.org/x/text/language/display"
-	mgo "gopkg.in/mgo.v2"
 )
 
 // a set of environment variable names, those variables must be provided during the startup time by the caller.

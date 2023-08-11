@@ -22,8 +22,8 @@ import (
 	// "github.com/davidbyttow/govips/pkg/vips".
 	// To resolve the issue just remove the content of the file while executing "go generate".
 	"bitbucket.org/iharsuvorau/wander"
-	mgo "gopkg.in/mgo.v2"
-	"gopkg.in/mgo.v2/bson"
+	"github.com/globalsign/mgo"
+	"github.com/globalsign/mgo/bson"
 )
 
 const (

@@ -6,6 +6,7 @@ require (
 	bitbucket.org/iharsuvorau/wander v1.0.0
 	github.com/Machiel/slugify v1.0.1
 	github.com/davidbyttow/govips v0.0.0-20190304175058-d272f04c0fea // indirect
+	github.com/globalsign/mgo v0.0.0-20181015135952-eeefdecb41b8
 	github.com/gorilla/mux v1.7.3
 	github.com/gorilla/schema v1.1.0
 	github.com/gorilla/securecookie v1.1.1

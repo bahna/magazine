@@ -12,8 +12,8 @@ import (
 
 	"github.com/bahna/magazine/webserver/mongo"
 	"github.com/bahna/magazine/webserver/user"
-	mgo "gopkg.in/mgo.v2"
-	"gopkg.in/mgo.v2/bson"
+	"github.com/globalsign/mgo"
+	"github.com/globalsign/mgo/bson"
 )
 
 // AllTopics returs topics sorted by weight.

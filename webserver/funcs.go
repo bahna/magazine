@@ -16,7 +16,7 @@ import (
 	"github.com/nicksnyder/go-i18n/i18n"
 	"golang.org/x/text/language"
 	"golang.org/x/text/language/display"
-	"gopkg.in/mgo.v2/bson"
+	"github.com/globalsign/mgo/bson"
 )
 
 func generateTmplFuncs(app *application) template.FuncMap {

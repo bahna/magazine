@@ -7,8 +7,8 @@ import (
 
 	"github.com/bahna/magazine/webserver/cms"
 	"golang.org/x/text/language"
-	mgo "gopkg.in/mgo.v2"
-	"gopkg.in/mgo.v2/bson"
+	"github.com/globalsign/mgo"
+	"github.com/globalsign/mgo/bson"
 )
 
 // ensureIndexes creates mongo indexes.

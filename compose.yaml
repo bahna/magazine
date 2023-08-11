@@ -1,0 +1,16 @@
+services:
+  mongodb:
+    image: mongo:3.6
+    restart: on-failure
+  
+  magazine:
+    image: nokal/bahna-magazine
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
+    depends_on:
+      - mongodb
+    ports:
+      - 8080:8080
+    command: ["sh", "-c", ". /deploy/secret.bash && /deploy/magazine-server -dbhost mongodb://mongodb -log /deploy/magazine.log -assets /deploy/assets -gassets /deploy/i18n"]
